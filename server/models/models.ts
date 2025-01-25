@@ -1,7 +1,23 @@
-const sequelize = require("../db");
-const { DataTypes } = require("sequelize");
+import { DataTypes, Model } from "sequelize";
+import sequelize from "../db";
+import { StudentAttributes } from "./StudentAttributes";
+import { StudentCreationAttributes } from "./StudentCreationAttributes";
+import { ClassAttributes } from "./ClassAttributes";
+import { ClassCreationAttributes } from "./ClassCreationAttributes";
+import { MealAttributes } from "./MealAttributes";
+import { MealCreationAttributes } from "./MealCreationAttributes";
+import { MealPlanAttributes } from "./MealPlanAttributes";
+import { MealPlanCreationAttributes } from "./MealPlanCreationAttributes";
+import { AttendanceAttributes } from "./AttendanceAttributes";
+import { AttendanceCreationAttributes } from "./AttendanceCreationAttributes";
+import { PaymentAttributes } from "./PaymentAttributes";
+import { PaymentCreationAttributes } from "./PaymentCreationAttributes";
+import { DietRestrictionAttributes } from "./DietRestrictionAttributes";
+import { DietRestrictionCreationAttributes } from "./DietRestrictionCreationAttributes";
+import { StudentMealRecordAttributes } from "./StudentMealRecordAttributes";
+import { StudentMealRecordCreationAttributes } from "./StudentMealRecordCreationAttributes";
 
-const Student = sequelize.define(
+const Student = sequelize.define<Model<StudentAttributes, StudentCreationAttributes>>(
   "Student",
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -12,7 +28,7 @@ const Student = sequelize.define(
   { tableName: "students" }
 );
 
-const Class = sequelize.define(
+const Class = sequelize.define<Model<ClassAttributes, ClassCreationAttributes>>(
   "Class",
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -21,7 +37,7 @@ const Class = sequelize.define(
   { tableName: "classes" }
 );
 
-const Meal = sequelize.define(
+const Meal = sequelize.define<Model<MealAttributes, MealCreationAttributes>>(
   "Meal",
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -32,7 +48,7 @@ const Meal = sequelize.define(
   { tableName: "meals" }
 );
 
-const MealPlan = sequelize.define(
+const MealPlan = sequelize.define<Model<MealPlanAttributes, MealPlanCreationAttributes>>(
   "MealPlan",
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -42,7 +58,7 @@ const MealPlan = sequelize.define(
   { tableName: "meal_plans" }
 );
 
-const Attendance = sequelize.define(
+const Attendance = sequelize.define<Model<AttendanceAttributes, AttendanceCreationAttributes>>(
   "Attendance",
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -57,7 +73,7 @@ const Attendance = sequelize.define(
   { tableName: "attendance" }
 );
 
-const Payment = sequelize.define(
+const Payment = sequelize.define<Model<PaymentAttributes, PaymentCreationAttributes>>(
   "Payment",
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -68,7 +84,7 @@ const Payment = sequelize.define(
   { tableName: "payments" }
 );
 
-const DietRestriction = sequelize.define(
+const DietRestriction = sequelize.define<Model<DietRestrictionAttributes, DietRestrictionCreationAttributes>>(
   "DietRestriction",
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -78,7 +94,7 @@ const DietRestriction = sequelize.define(
   { tableName: "diet_restrictions" }
 );
 
-const StudentMealRecord = sequelize.define(
+const StudentMealRecord = sequelize.define<Model<StudentMealRecordAttributes, StudentMealRecordCreationAttributes>>(
   "StudentMealRecord",
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -119,7 +135,7 @@ sequelize
     console.error("Error creating tables:", error);
   });
 
-module.exports = {
+export default {
   Student,
   Class,
   Meal,
