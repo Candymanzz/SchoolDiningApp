@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@types/html-pdf": "^3.0.3"
+  }
+}
