@@ -6,8 +6,9 @@ import express, { Request, Response } from "express";
 import sequelize from "./db";
 import models from "./models/models";
 import cors from "cors";
+import router from "./routes/index";
 
-const PORT = process.env.PORT || 3000; // Provide a fallback port
+const PORT = process.env.PORT || 5000; // Provide a fallback port
 
 const app = express();
 
@@ -16,6 +17,8 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.use("/api", router);
+
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "getRec" });
 });
