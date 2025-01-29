@@ -1,65 +1,49 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../db";
-import { StudentAttributes } from "./StudentAttributes";
-import { StudentCreationAttributes } from "./StudentCreationAttributes";
-import { ClassAttributes } from "./ClassAttributes";
-import { ClassCreationAttributes } from "./ClassCreationAttributes";
-import { MealAttributes } from "./MealAttributes";
-import { MealCreationAttributes } from "./MealCreationAttributes";
-import { MealPlanAttributes } from "./MealPlanAttributes";
-import { MealPlanCreationAttributes } from "./MealPlanCreationAttributes";
-import { AttendanceAttributes } from "./AttendanceAttributes";
-import { AttendanceCreationAttributes } from "./AttendanceCreationAttributes";
-import { PaymentAttributes } from "./PaymentAttributes";
-import { PaymentCreationAttributes } from "./PaymentCreationAttributes";
-import { DietRestrictionAttributes } from "./DietRestrictionAttributes";
-import { DietRestrictionCreationAttributes } from "./DietRestrictionCreationAttributes";
-import { StudentMealRecordAttributes } from "./StudentMealRecordAttributes";
-import { StudentMealRecordCreationAttributes } from "./StudentMealRecordCreationAttributes";
 
-const Student = sequelize.define<Model<StudentAttributes, StudentCreationAttributes>>(
-  "Student",
+class Student extends Model { }
+Student.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, allowNull: false },
     classId: { type: DataTypes.INTEGER, allowNull: false },
     birthDate: { type: DataTypes.DATEONLY, allowNull: false },
   },
-  { tableName: "students" }
+  { sequelize, tableName: "students" }
 );
 
-const Class = sequelize.define<Model<ClassAttributes, ClassCreationAttributes>>(
-  "Class",
+class Class extends Model { }
+Class.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, allowNull: false },
   },
-  { tableName: "classes" }
+  { sequelize, tableName: "classes" }
 );
 
-const Meal = sequelize.define<Model<MealAttributes, MealCreationAttributes>>(
-  "Meal",
+class Meal extends Model { }
+Meal.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, allowNull: false },
     description: { type: DataTypes.TEXT },
     price: { type: DataTypes.FLOAT, allowNull: false },
   },
-  { tableName: "meals" }
+  { sequelize, tableName: "meals" }
 );
 
-const MealPlan = sequelize.define<Model<MealPlanAttributes, MealPlanCreationAttributes>>(
-  "MealPlan",
+class MealPlan extends Model { }
+MealPlan.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     date: { type: DataTypes.DATEONLY, allowNull: false },
     mealId: { type: DataTypes.INTEGER, allowNull: false },
   },
-  { tableName: "meal_plans" }
+  { sequelize, tableName: "meal_plans" }
 );
 
-const Attendance = sequelize.define<Model<AttendanceAttributes, AttendanceCreationAttributes>>(
-  "Attendance",
+class Attendance extends Model { }
+Attendance.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     studentId: { type: DataTypes.INTEGER, allowNull: false },
@@ -70,41 +54,42 @@ const Attendance = sequelize.define<Model<AttendanceAttributes, AttendanceCreati
       defaultValue: true,
     },
   },
-  { tableName: "attendance" }
+  { sequelize, tableName: "attendance" }
 );
 
-const Payment = sequelize.define<Model<PaymentAttributes, PaymentCreationAttributes>>(
-  "Payment",
+class Payment extends Model { }
+Payment.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     studentId: { type: DataTypes.INTEGER, allowNull: false },
     amount: { type: DataTypes.FLOAT, allowNull: false },
     date: { type: DataTypes.DATEONLY, allowNull: false },
   },
-  { tableName: "payments" }
+  { sequelize, tableName: "payments" }
 );
 
-const DietRestriction = sequelize.define<Model<DietRestrictionAttributes, DietRestrictionCreationAttributes>>(
-  "DietRestriction",
+class DietRestriction extends Model { }
+DietRestriction.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     studentId: { type: DataTypes.INTEGER, allowNull: false },
     restriction: { type: DataTypes.STRING, allowNull: false },
   },
-  { tableName: "diet_restrictions" }
+  { sequelize, tableName: "diet_restrictions" }
 );
 
-const StudentMealRecord = sequelize.define<Model<StudentMealRecordAttributes, StudentMealRecordCreationAttributes>>(
-  "StudentMealRecord",
+class StudentMealRecord extends Model { }
+StudentMealRecord.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     studentId: { type: DataTypes.INTEGER, allowNull: false },
     mealId: { type: DataTypes.INTEGER, allowNull: false },
     date: { type: DataTypes.DATEONLY, allowNull: false },
   },
-  { tableName: "student_meal_records" }
+  { sequelize, tableName: "student_meal_records" }
 );
 
+// Relations
 Student.belongsTo(Class, { foreignKey: "classId" });
 Class.hasMany(Student, { foreignKey: "classId" });
 
@@ -126,6 +111,7 @@ Student.hasMany(StudentMealRecord, { foreignKey: "studentId" });
 StudentMealRecord.belongsTo(Meal, { foreignKey: "mealId" });
 Meal.hasMany(StudentMealRecord, { foreignKey: "mealId" });
 
+// Sync database
 sequelize
   .sync({ alter: true })
   .then(() => {
@@ -135,7 +121,7 @@ sequelize
     console.error("Error creating tables:", error);
   });
 
-export default {
+const models = {
   Student,
   Class,
   Meal,
@@ -145,3 +131,5 @@ export default {
   DietRestriction,
   StudentMealRecord,
 };
+
+export default models;
