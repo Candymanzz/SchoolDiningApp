@@ -1,0 +1,12 @@
+export const STUDENTS_ROUTE = '/students';
+export const CLASSES_ROUTE = '/classes';
+export const MEALS_ROUTE = '/meals';
+export const MEAL_PLANS_ROUTE = '/meal-plans';
+export const ATTENDANCE_ROUTE = '/attendance';
+export const PAYMENTS_ROUTE = '/payments';
+export const DIET_RESTRICTIONS_ROUTE = '/diet-restrictions';
+export const STUDENT_MEAL_RECORDS_ROUTE = '/student-meal-records';
+export const MAIN_ROUTE = '/';
+export const LOGIN_ROUTE = '/login';
+export const REGISTRATION_ROUTE = '/registration';
+export const ADMIN_ROUTE = '/admin';

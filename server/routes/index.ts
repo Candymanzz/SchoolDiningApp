@@ -17,7 +17,6 @@ router.use("/attendances", attendancesRouter);
 router.use("/payments", paymentsRouter);
 router.use("/dietRestrictions", dietRestrictionsRouter);
 router.use("/studentMealRecords", studentMealRecordsRouter);
-router.use("/students", studentsRouter);
 router.use("/users", usersRouter);
 
 export default router;
