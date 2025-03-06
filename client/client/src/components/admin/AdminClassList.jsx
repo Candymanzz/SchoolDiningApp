@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getClasses, createClass, deleteClass } from "../../http/adminAPI";
+import { fetchClasses, createClass, deleteClass } from "../../http/modelAPI";
 import { Button, Table, Form, Modal } from "react-bootstrap";
 
 const AdminClassList = () => {
@@ -12,19 +12,31 @@ const AdminClassList = () => {
     }, []);
 
     const loadClasses = async () => {
-        const data = await getClasses();
-        setClasses(data);
+        try {
+            const data = await fetchClasses(); // Загружаем список классов
+            setClasses(data);
+        } catch (error) {
+            console.error("Ошибка загрузки классов", error);
+        }
     };
 
     const addClass = async () => {
-        await createClass({ name: newClassName });
-        loadClasses();
-        setShow(false);
+        try {
+            await createClass(newClassName); // Создаём новый класс
+            loadClasses(); // Обновляем список
+            setShow(false); // Закрываем модальное окно
+        } catch (error) {
+            console.error("Ошибка добавления класса", error);
+        }
     };
 
     const removeClass = async (id) => {
-        await deleteClass(id);
-        loadClasses();
+        try {
+            await deleteClass(id); // Удаляем класс
+            loadClasses(); // Обновляем список
+        } catch (error) {
+            console.error("Ошибка удаления класса", error);
+        }
     };
 
     return (

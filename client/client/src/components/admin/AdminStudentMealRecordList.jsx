@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
-import { fetchStudentMealRecords, deleteStudentMealRecord } from "../../http/studentMealRecordAPI";
+import { fetchStudentMealRecords, deleteStudentMealRecord } from "../../http/modelAPI";
 
 const AdminStudentMealRecordList = () => {
     const [records, setRecords] = useState([]);

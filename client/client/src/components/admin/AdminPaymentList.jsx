@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
-import { fetchPayments, deletePayment } from "../../http/paymentAPI";
+import { fetchPayments, deletePayment } from "../../http/modelAPI";
 
 const AdminPaymentList = () => {
     const [payments, setPayments] = useState([]);

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMealPlans } from "../store/mealPlansSlice";
-import { fetchMealPlans } from "../http/mealPlanAPI";
+import { fetchModel } from "../http/modelAPI";
 import { Table, Container, Spinner } from "react-bootstrap";
 
 const MealPlanList = () => {
@@ -9,30 +9,43 @@ const MealPlanList = () => {
     const { mealPlans } = useSelector((state) => state.mealPlans);
 
     useEffect(() => {
-        fetchMealPlans().then((data) => dispatch(setMealPlans(data)));
+        const getMealPlans = async () => {
+            try {
+                const data = await fetchModel("mealplan");
+                dispatch(setMealPlans(data));
+            } catch (error) {
+                console.error("Ошибка при загрузке планов питания:", error);
+            }
+        };
+
+        getMealPlans();
     }, [dispatch]);
 
-    if (!mealPlans.length) {
-        return <Spinner animation="border" />;
+    if (!mealPlans || mealPlans.length === 0) {
+        return (
+            <Container className="d-flex justify-content-center align-items-center">
+                <Spinner animation="border" />
+            </Container>
+        );
     }
 
     return (
         <Container>
-            <h2>Meal Plans</h2>
+            <h2 className="my-3">Планы питания</h2>
             <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Date</th>
-                        <th>Meal</th>
+                        <th>Дата</th>
+                        <th>Блюдо</th>
                     </tr>
                 </thead>
                 <tbody>
                     {mealPlans.map((plan, index) => (
                         <tr key={plan.id}>
                             <td>{index + 1}</td>
-                            <td>{plan.date}</td>
-                            <td>{plan.meal.name}</td>
+                            <td>{new Date(plan.date).toLocaleDateString()}</td>
+                            <td>{plan.meal?.name || "Не указано"}</td>
                         </tr>
                     ))}
                 </tbody>

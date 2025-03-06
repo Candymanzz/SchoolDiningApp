@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getStudents, createStudent, deleteStudent } from "../../http/adminAPI";
+import { getStudents, createStudent, deleteStudent } from "../../http/modelAPI";
 import { Button, Table, Form, Modal } from "react-bootstrap";
 
 const AdminStudentList = () => {

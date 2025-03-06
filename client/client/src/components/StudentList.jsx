@@ -1,15 +1,33 @@
 import { useEffect } from "react";
-import { Table, Button, Container } from "react-bootstrap";
+import { Table, Button, Container, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchStudents } from "../store/studentsSlice";
+import { setStudents } from "../store/studentsSlice";
+import { fetchModel } from "../http/modelAPI";
 
 const StudentList = () => {
     const dispatch = useDispatch();
     const { students } = useSelector((state) => state.students);
 
     useEffect(() => {
-        dispatch(fetchStudents());
+        const getStudents = async () => {
+            try {
+                const data = await fetchModel("students");
+                dispatch(setStudents(data));
+            } catch (error) {
+                console.error("Ошибка при загрузке студентов:", error);
+            }
+        };
+
+        getStudents();
     }, [dispatch]);
+
+    if (!students || students.length === 0) {
+        return (
+            <Container className="d-flex justify-content-center align-items-center">
+                <Spinner animation="border" />
+            </Container>
+        );
+    }
 
     return (
         <Container>
@@ -29,8 +47,8 @@ const StudentList = () => {
                         <tr key={student.id}>
                             <td>{student.id}</td>
                             <td>{student.name}</td>
-                            <td>{student.classId}</td>
-                            <td>{student.birthDate}</td>
+                            <td>{student.class?.name || "Не указано"}</td>
+                            <td>{new Date(student.birthDate).toLocaleDateString()}</td>
                             <td>
                                 <Button variant="warning" size="sm">Редактировать</Button>{' '}
                                 <Button variant="danger" size="sm">Удалить</Button>

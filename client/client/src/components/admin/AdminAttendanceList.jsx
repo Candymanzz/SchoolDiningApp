@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
-import { fetchAttendance, deleteAttendance } from "../../http/attendanceAPI";
+import { fetchAttendance, deleteAttendance } from "../../http/modelAPI";
 
 const AdminAttendanceList = () => {
     const [attendanceRecords, setAttendanceRecords] = useState([]);

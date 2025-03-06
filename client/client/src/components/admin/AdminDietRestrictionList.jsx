@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
-import { fetchDietRestrictions, deleteDietRestriction } from "../../http/dietRestrictionAPI";
+import { fetchDietRestrictions, deleteDietRestriction } from "../../http/modelAPI";
 
 const AdminDietRestrictionList = () => {
     const [dietRestrictions, setDietRestrictions] = useState([]);

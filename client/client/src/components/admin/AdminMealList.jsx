@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getMeals, createMeal, deleteMeal } from "../../http/adminAPI";
+import { fetchMeals, createMeal, deleteMeal } from "../../http/modelAPI";
 import { Button, Table, Form, Modal } from "react-bootstrap";
 
 const AdminMealList = () => {
@@ -12,19 +12,32 @@ const AdminMealList = () => {
     }, []);
 
     const loadMeals = async () => {
-        const data = await getMeals();
-        setMeals(data);
+        try {
+            const data = await fetchMeals();
+            setMeals(data);
+        } catch (error) {
+            console.error("Ошибка загрузки меню", error);
+        }
     };
 
     const addMeal = async () => {
-        await createMeal(newMeal);
-        loadMeals();
-        setShow(false);
+        try {
+            await createMeal(newMeal.name, newMeal.description, newMeal.price);
+            loadMeals();
+            setShow(false);
+            setNewMeal({ name: "", price: "" });
+        } catch (error) {
+            console.error("Ошибка добавления блюда", error);
+        }
     };
 
     const removeMeal = async (id) => {
-        await deleteMeal(id);
-        loadMeals();
+        try {
+            await deleteMeal(id);
+            loadMeals();
+        } catch (error) {
+            console.error("Ошибка удаления блюда", error);
+        }
     };
 
     return (
@@ -60,18 +73,33 @@ const AdminMealList = () => {
                     <Modal.Title>Добавить блюдо</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Control
-                        type="text"
-                        placeholder="Название блюда"
-                        value={newMeal.name}
-                        onChange={(e) => setNewMeal({ ...newMeal, name: e.target.value })}
-                    />
-                    <Form.Control
-                        type="number"
-                        placeholder="Цена"
-                        value={newMeal.price}
-                        onChange={(e) => setNewMeal({ ...newMeal, price: e.target.value })}
-                    />
+                    <Form.Group>
+                        <Form.Label>Название</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Название блюда"
+                            value={newMeal.name}
+                            onChange={(e) => setNewMeal({ ...newMeal, name: e.target.value })}
+                        />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Описание</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Описание блюда"
+                            value={newMeal.description}
+                            onChange={(e) => setNewMeal({ ...newMeal, description: e.target.value })}
+                        />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Цена</Form.Label>
+                        <Form.Control
+                            type="number"
+                            placeholder="Цена"
+                            value={newMeal.price}
+                            onChange={(e) => setNewMeal({ ...newMeal, price: e.target.value })}
+                        />
+                    </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShow(false)}>Закрыть</Button>

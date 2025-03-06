@@ -1,15 +1,33 @@
 import { useEffect } from "react";
-import { Table, Container } from "react-bootstrap";
+import { Table, Container, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchMeals } from "../store/mealsSlice";
+import { setMeals } from "../store/mealsSlice";
+import { fetchModel } from "../http/modelAPI";
 
 const MealList = () => {
     const dispatch = useDispatch();
     const { meals } = useSelector((state) => state.meals);
 
     useEffect(() => {
-        dispatch(fetchMeals());
+        const getMeals = async () => {
+            try {
+                const data = await fetchModel("meals");
+                dispatch(setMeals(data));
+            } catch (error) {
+                console.error("Ошибка при загрузке меню:", error);
+            }
+        };
+
+        getMeals();
     }, [dispatch]);
+
+    if (!meals || meals.length === 0) {
+        return (
+            <Container className="d-flex justify-content-center align-items-center">
+                <Spinner animation="border" />
+            </Container>
+        );
+    }
 
     return (
         <Container>
@@ -17,18 +35,18 @@ const MealList = () => {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Название</th>
                         <th>Описание</th>
                         <th>Цена</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {meals.map((meal) => (
+                    {meals.map((meal, index) => (
                         <tr key={meal.id}>
-                            <td>{meal.id}</td>
+                            <td>{index + 1}</td>
                             <td>{meal.name}</td>
-                            <td>{meal.description}</td>
+                            <td>{meal.description || "Нет описания"}</td>
                             <td>{meal.price} ₽</td>
                         </tr>
                     ))}

@@ -1,15 +1,33 @@
 import { useEffect } from "react";
-import { Table, Container } from "react-bootstrap";
+import { Table, Container, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchClasses } from "../store/classesSlice";
+import { setClasses } from "../store/classesSlice";
+import { fetchModel } from "../http/modelAPI";
 
 const ClassList = () => {
     const dispatch = useDispatch();
     const { classes } = useSelector((state) => state.classes);
 
     useEffect(() => {
-        dispatch(fetchClasses());
+        const getClasses = async () => {
+            try {
+                const data = await fetchModel("classes");
+                dispatch(setClasses(data));
+            } catch (error) {
+                console.error("Ошибка при загрузке классов:", error);
+            }
+        };
+
+        getClasses();
     }, [dispatch]);
+
+    if (!classes || classes.length === 0) {
+        return (
+            <Container className="d-flex justify-content-center align-items-center">
+                <Spinner animation="border" />
+            </Container>
+        );
+    }
 
     return (
         <Container>

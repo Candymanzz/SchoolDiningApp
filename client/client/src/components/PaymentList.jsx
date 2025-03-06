@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPayments } from "../store/paymentsSlice";
-import { fetchPayments } from "../http/paymentAPI";
+import { fetchModel } from "../http/modelAPI";
 import { Table, Container, Spinner } from "react-bootstrap";
 
 const PaymentList = () => {
@@ -9,32 +9,45 @@ const PaymentList = () => {
     const { payments } = useSelector((state) => state.payments);
 
     useEffect(() => {
-        fetchPayments().then((data) => dispatch(setPayments(data)));
+        const getPayments = async () => {
+            try {
+                const data = await fetchModel("payments");
+                dispatch(setPayments(data));
+            } catch (error) {
+                console.error("Ошибка при загрузке платежей:", error);
+            }
+        };
+
+        getPayments();
     }, [dispatch]);
 
-    if (!payments.length) {
-        return <Spinner animation="border" />;
+    if (!payments || payments.length === 0) {
+        return (
+            <Container className="d-flex justify-content-center align-items-center">
+                <Spinner animation="border" />
+            </Container>
+        );
     }
 
     return (
         <Container>
-            <h2>Payments</h2>
+            <h2 className="my-3">Платежи</h2>
             <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Student</th>
-                        <th>Amount</th>
-                        <th>Date</th>
+                        <th>Студент</th>
+                        <th>Сумма</th>
+                        <th>Дата</th>
                     </tr>
                 </thead>
                 <tbody>
                     {payments.map((payment, index) => (
                         <tr key={payment.id}>
                             <td>{index + 1}</td>
-                            <td>{payment.student.name}</td>
-                            <td>${payment.amount}</td>
-                            <td>{payment.date}</td>
+                            <td>{payment.student?.name || "Не указано"}</td>
+                            <td>{payment.amount} ₽</td>
+                            <td>{new Date(payment.date).toLocaleDateString()}</td>
                         </tr>
                     ))}
                 </tbody>
