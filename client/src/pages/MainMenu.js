@@ -37,7 +37,7 @@ export default function MainMenu() {
               <NavLink to={EVENTS_ROUTE} className="mt-3" style={{ textDecoration: 'none' }}>
                 <Button className="d-flex justify-content-between" variant={"outline-primary"} style={{ width: "100%" }}>
                   <Image width="20" src="./table.png" fluid />
-                  <div style={{ marginRight: 20 }}>Events</div>
+                  <div style={{ marginRight: 20 }}>Nutrition</div>
                   <div></div>
                 </Button>
               </NavLink>

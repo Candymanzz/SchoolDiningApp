@@ -47,17 +47,16 @@ export default function CreateEventModal({ show, onHide }) {
             <Modal.Body>
                 <Form>
                 <Form.Select className="mt-2" value={type} onChange={e => setType(e.target.value)}>
-                        <option value=''>Select type</option>
-                        <option value='Экскурсия'>Экскурсия</option>
-                        <option value='Олимпиада'>Олимпиада</option>
-                        <option value='Конкурс'>Конкурс</option>
-                        <option value='Поучающее видео'>Поучающее видео</option>
-                        <option value='Родительское собрание'>Родительское собрание</option>
-                        <option value='Классный час'>Классный час</option>
+                        <option value=''>Select class</option>
+                        <option value='11-A'>11-A</option>
+                        <option value='10-A'>10-A</option>
+                        <option value='11-Б'>11-Б</option>
+                        <option value='10-Б'>10-Б</option>
+                        <option value='9-А'>9-А</option>
+                        <option value='9-Б'>9-Б</option>
                     </Form.Select>
                     <Form.Control maxLength="50" className="mt-2" placeholder={"Name"} value={name} onChange={e => setName(e.target.value)} />
                     <Form.Control type="date" className="mt-2" value={date} onChange={e => setDate(e.target.value)} />
-                    <Form.Control className="mt-2" type="file" onChange={selectFile} />
                 </Form>
             </Modal.Body>
             <Modal.Footer>

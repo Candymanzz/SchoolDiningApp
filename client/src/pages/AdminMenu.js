@@ -27,7 +27,7 @@ export default function AdminMenu() {
       <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateClassVisible(true)}>Add class</Button>
       <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateStudentVisible(true)}>Add student</Button>
       <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateAttendanceVisible(true)}>Add attendance</Button>
-      <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateEventVisible(true)}>Add event</Button>
+      <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateEventVisible(true)}>Add nutrition</Button>
       <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateParticipantVisible(true)}>Add participant</Button>
       
       {employee.employee_id === "ADMIN" ?

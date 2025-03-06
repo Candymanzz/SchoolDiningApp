@@ -67,7 +67,7 @@ export default function EventsList({employee, events, participants, students, cl
                                     <ListGroup>Participants: <ListGroup.Item key={1}>none</ListGroup.Item></ListGroup>
                                 }
                                 {employee.employee_id === "ADMIN" &&
-                                    <Button className="m-1" variant="outline-danger" onClick={() => { delEvent(e.event_id) }}>Delete event</Button>
+                                    <Button className="m-1" variant="outline-danger" onClick={() => { delEvent(e.event_id) }}>Delete nutrition</Button>
                                 }
                             </Accordion.Body>
                         </Accordion.Item>
