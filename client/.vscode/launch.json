@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Debug React App",
+            "url": "http://localhost:3000", // Убедитесь, что порт совпадает с вашим приложением
+            "webRoot": "${workspaceFolder}/src", // Указывает на папку с исходным кодом
+            "sourceMaps": true, // Включает source maps для отладки
+            "skipFiles": [
+                "<node_internals>/**"
+            ] // Пропускает внутренние файлы Node.js
+        }
+    ]
+}
