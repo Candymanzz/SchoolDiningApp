@@ -9,7 +9,7 @@
 
 1. Клонируйте репозиторий
    ```sh
-   git clone https://github.com/Arthailor/SVCHVS-Kurs.git
+   git clone https://github.com/Candymanzz/SchoolDiningApp.git
    ```
 2. Установите NPM пакеты в директориях client и server
    ```sh
@@ -41,11 +41,9 @@
 
 ## Использование
 
-При запуске Web-приложения нажать кнопку Authorization и ввести admin admin.
+При запуске Web-приложения нажать кнопку Authorization и ввести admin пароль и почта.
 
-В файле MainMenu.js можно раскомментировать кнопку Seeding для заполнения базы данных (нужно быть авторизованным для её выполнения).
-
-Заполнятся все таблицы кроме trips и excursions. Для этого в директории examples есть текстовый файл с данными и фотографии.
+Кнопка Seeding для автозаполнения бд
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
