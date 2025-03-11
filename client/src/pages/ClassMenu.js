@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setClasses, setTotalCount, setPage } from "../store/classesSlice"
 import Pages from '../components/Pages'
 import ClassesList from '../components/ClassesList';
-import { fetchClasses, fetchEvents, fetchParticipants } from '../http/modelAPI'
-import { setEvents } from '../store/eventsSlice'
+import { fetchClasses, fetchNutritions, fetchParticipants } from '../http/modelAPI'
+import { setNutritions } from '../store/nutritionsSlice'
 import { setParticipants } from '../store/participantsSlice'
 
 export default function ClassMenu() {
@@ -25,8 +25,8 @@ export default function ClassMenu() {
   const handlePage = (n) => {
     dispatch(setPage(n))
   }
-  const handleEvents = (e) => {
-    dispatch(setEvents(e))
+  const handleNutritions = (e) => {
+    dispatch(setNutritions(e))
   }
   const handleParticipants = (p) => {
     dispatch(setParticipants(p))
@@ -37,8 +37,8 @@ export default function ClassMenu() {
       handleClasses(data.rows)
       handleTotalCount(data.count)
     })
-    fetchEvents(null,null,1,999).then(data => {
-      handleEvents(data.rows)
+    fetchNutritions(null,null,1,999).then(data => {
+      handleNutritions(data.rows)
     })
     fetchParticipants(null,1,999).then(data => {
       handleParticipants(data.rows)

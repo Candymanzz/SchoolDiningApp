@@ -76,14 +76,14 @@ export const createAndDownloadAttendPdf = async (date, classx, students, attenda
 };
 
 
-//Events
-export const createEvent = async (event) => {
-    const { data } = await $authHost.post('api/event/', event)
+//Nutritions
+export const createNutritions = async (nutrition) => {
+    const { data } = await $authHost.post('api/nutrition/', nutrition)
     return data
 }
 
-export const fetchEvents = async (dateFrom, dateTo, page, limit) => {
-    const { data } = await $host.get('api/event/', {
+export const fetchNutritions = async (dateFrom, dateTo, page, limit) => {
+    const { data } = await $host.get('api/nutrition/', {
         params: {
             dateFrom, dateTo, page, limit
         }
@@ -91,12 +91,12 @@ export const fetchEvents = async (dateFrom, dateTo, page, limit) => {
     return data
 }
 
-export const deleteEvent = async (id) => {
-    const { data } = await $authHost.delete('api/event/' + id)
+export const deleteNutritions = async (id) => {
+    const { data } = await $authHost.delete('api/nutrition/' + id)
     return data
 }
 
-export const createAndDownloadEventsPdf = async (date, classx, students, attendance) => {
+export const createAndDownloadNutritionsPdf = async (date, classx, students, attendance) => {
     try {
 
         await $authHost.post('api/attendance/pdf', { date, classx, students, attendance });
@@ -111,15 +111,15 @@ export const createAndDownloadEventsPdf = async (date, classx, students, attenda
 };
 
 //Participants
-export const createParticipant = async (studentStudentId, classClassId, eventEventId, grade) => {
-    const { data } = await $authHost.post('api/participant/', { studentStudentId, classClassId, eventEventId, grade })
+export const createParticipant = async (studentStudentId, classClassId, nutritionNutritionId, grade) => {
+    const { data } = await $authHost.post('api/participant/', { studentStudentId, classClassId, nutritionNutritionId, grade })
     return data
 }
 
-export const fetchParticipants = async (event_id, page, limit) => {
+export const fetchParticipants = async (nutrition_id, page, limit) => {
     const { data } = await $host.get('api/participant/', {
         params: {
-            event_id, page, limit
+            nutrition_id, page, limit
         }
     })
     return data

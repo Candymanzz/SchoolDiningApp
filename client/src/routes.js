@@ -1,11 +1,11 @@
 import Authorization from "./pages/Authorization"
 import MainMenu from "./pages/MainMenu"
 import AdminMenu from "./pages/AdminMenu"
-import EventMenu from "./pages/EventMenu"
+import NutritionMenu from "./pages/NutritionMenu"
 import ClassMenu from "./pages/ClassMenu"
 import AttendanceMenu from "./pages/AttendanceMenu"
 import EmployeeListMenu from "./pages/EmployeeMenu"
-import { ADMIN_ROUTE, ATTENDANCE_ROUTE, CLASSES_ROUTE, EVENTS_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, EMPLOYEES_ROUTE} from "./utils/consts"
+import { ADMIN_ROUTE, ATTENDANCE_ROUTE, CLASSES_ROUTE, NUTRITIONS_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, EMPLOYEES_ROUTE} from "./utils/consts"
 
 export const authRoutes = [
     {
@@ -32,8 +32,8 @@ export const publicRoutes = [
         Component: Authorization
     },
     {
-        path: EVENTS_ROUTE,
-        Component: EventMenu
+        path: NUTRITIONS_ROUTE,
+        Component: NutritionMenu
     },
     {
         path: CLASSES_ROUTE,

@@ -7,7 +7,7 @@ import { EMPLOYEES_ROUTE } from '../utils/consts';
 import CreateClassModal from '../components/Admin/CreateClassModal';
 import CreateStudentModal from '../components/Admin/CreateStudentModal';
 import CreateAttendanceModal from '../components/Admin/CreateAttendanceModal';
-import CreateEventModal from '../components/Admin/CreateEventModal';
+import CreateNutritionModal from '../components/Admin/CreateNutritionModal';
 import CreateParticipantModal from '../components/Admin/CreateParticipantModal';
 
 export default function AdminMenu() {
@@ -19,7 +19,7 @@ export default function AdminMenu() {
   const [createStudentVisible, setCreateStudentVisible] = useState(false)
   const [createClassVisible, setCreateClassVisible] = useState(false)
   const [createAttendanceVisible, setCreateAttendanceVisible] = useState(false)
-  const [createEventVisible, setCreateEventVisible] = useState(false)
+  const [createNutritionVisible, setCreateNutritionVisible] = useState(false)
   const [createParticipantVisible, setCreateParticipantVisible] = useState(false)
 
   return (
@@ -27,7 +27,7 @@ export default function AdminMenu() {
       <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateClassVisible(true)}>Add class</Button>
       <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateStudentVisible(true)}>Add student</Button>
       <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateAttendanceVisible(true)}>Add attendance</Button>
-      <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateEventVisible(true)}>Add nutrition</Button>
+      <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateNutritionVisible(true)}>Add nutrition</Button>
       <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateParticipantVisible(true)}>Add participant</Button>
       
       {employee.employee_id === "ADMIN" ?
@@ -43,7 +43,7 @@ export default function AdminMenu() {
       <CreateStudentModal show={createStudentVisible} onHide={() => setCreateStudentVisible(false)} />
       <CreateClassModal show={createClassVisible} onHide={() => setCreateClassVisible(false)} />
       <CreateAttendanceModal show={createAttendanceVisible} onHide={() => setCreateAttendanceVisible(false)} />
-      <CreateEventModal show={createEventVisible} onHide={() => setCreateEventVisible(false)} />
+      <CreateNutritionModal show={createNutritionVisible} onHide={() => setCreateNutritionVisible(false)} />
         <CreateParticipantModal show={createParticipantVisible} onHide={() => setCreateParticipantVisible(false)} />
     </Container>
   )

@@ -3,7 +3,7 @@ import employeesReducer from "./employeesSlice"
 import classReducer from "./classesSlice"
 import studentsReducer from "./studentsSlice"
 import attendanceReducer from "./attendanceSlice"
-import eventsReducer from "./eventsSlice"
+import nutritionsReducer from "./nutritionsSlice"
 import participantsReducer from "./participantsSlice"
 
 const store = configureStore({
@@ -12,7 +12,7 @@ const store = configureStore({
     classes: classReducer,
     students: studentsReducer,
     attendance: attendanceReducer,
-    events: eventsReducer,
+    nutritions: nutritionsReducer,
     participants: participantsReducer
   },
 });

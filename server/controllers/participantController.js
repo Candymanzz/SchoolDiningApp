@@ -1,15 +1,15 @@
 const ApiError = require("../error/apiError")
-const { Event, Student, Class, Participant } = require("../models/models")
+const { Nutrition, Student, Class, Participant } = require("../models/models")
 
 class ParticipantController{
     async create (req, res, next) {
         try {
-            const { studentStudentId, classClassId, eventEventId, grade } = req.body
-            if (!eventEventId)
-                return next(ApiError.badRequest('No event id'))
-            const event = await Event.findOne({where: {event_id: eventEventId}})
-            if (!event)
-                return next(ApiError.badRequest('Incorrect event id'))
+            const { studentStudentId, classClassId, nutritionNutritionId, grade } = req.body
+            if (!nutritionNutritionId)
+                return next(ApiError.badRequest('No nutrition id'))
+            const nutrition = await Nutrition.findOne({where: {nutrition_id: nutritionNutritionId}})
+            if (!nutrition)
+                return next(ApiError.badRequest('Incorrect nutrition id'))
             if (studentStudentId){
                 const student = await Student.findOne({where: {student_id: studentStudentId}})
                 if (!student)
@@ -20,7 +20,7 @@ class ParticipantController{
                 if (!classx)
                     return next(ApiError.badRequest('Incorrect classx id'))
             }
-            const participant = await Participant.create({ studentStudentId, classClassId, eventEventId, grade })
+            const participant = await Participant.create({ studentStudentId, classClassId, nutritionNutritionId, grade })
 
             return res.json(participant)
         } catch (e) {
@@ -46,16 +46,16 @@ class ParticipantController{
     }
 
     async getAll (req, res) {
-        let { event_id, limit, page } = req.query
+        let { nutrition_id, limit, page } = req.query
         page = page || 1
         limit = limit || 9
         let offset = page * limit - limit
         let participants
-        if (!event_id) {
+        if (!nutrition_id) {
             participants = await Participant.findAndCountAll({ limit, offset })
         }
-        if (event_id) {
-            participants = await Participant.findAndCountAll({ where: { eventEventId: event_id }, limit, offset })
+        if (nutrition_id) {
+            participants = await Participant.findAndCountAll({ where: { nutritionNutritionId: nutrition_id }, limit, offset })
         }
         return res.json(participants)
     }
