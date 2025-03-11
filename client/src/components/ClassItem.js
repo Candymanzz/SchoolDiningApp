@@ -1,7 +1,7 @@
 import React from 'react'
 import { Accordion, Button, ListGroup } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
-import ClassEventModal from './ClassEventModal';
+import ClassNutritionModal from './ClassNutritionModal';
 import { deleteClass } from '../http/modelAPI';
 import StudentItem from './StudentItem';
 
@@ -40,13 +40,13 @@ export default function ClassItem({c, employees}) {
                     :
                     <ListGroup>Teacher: none</ListGroup>
                 }
-                <Button className="m-1 " variant="outline-success" onClick={() => { setModalShow(true) }}>View class events</Button>
+                <Button className="m-1 " variant="outline-success" onClick={() => { setModalShow(true) }}>View class nutritions</Button>
                 {employee.employee_id === "ADMIN" ?
                     <Button className="m-1 " variant="outline-danger" onClick={() => { delClass(c.class_id) }}>Delete class</Button>
                     :
                     ''
                 }
-                <ClassEventModal 
+                <ClassNutritionModal 
                     class_id = {c.class_id}
                     show={modalShow}
                     onHide={() => setModalShow(false)}
