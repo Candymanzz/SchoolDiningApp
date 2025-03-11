@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { createParticipant, fetchClasses, fetchEvents, fetchStudents } from '../../http/modelAPI';
+import { createParticipant, fetchClasses, fetchNutritions, fetchStudents } from '../../http/modelAPI';
 
 export default function CreateParticipantModal({ show, onHide }) {
-    const [event, setEvent] = useState(null);
+    const [nutrition, setNutrition] = useState(null);
     const [student, setStudent] = useState(null);
     const [classx, setClass] = useState(null);
     const [grade, setGrade] = useState(null);
-    const [selectedEventType, setSelectedEventType] = useState(null); // Track selected event type
+    const [selectedNutritionType, setSelectedNutritionType] = useState(null); // Track selected nutrition type
 
-    const [events, setEvents] = useState([]);
+    const [nutritions, setNutritions] = useState([]);
     const [students, setStudents] = useState([]);
     const [classes, setClasses] = useState([]);
 
@@ -20,16 +20,16 @@ export default function CreateParticipantModal({ show, onHide }) {
         fetchClasses(1, 999).then(data => {
             setClasses(data.rows);
         });
-        fetchEvents(null, null, 1, 999).then(data => {
-            setEvents(data.rows);
+        fetchNutritions(null, null, 1, 999).then(data => {
+            setNutritions(data.rows);
         });
     }, []);
 
     const addParticipant = async () => {
         try {
-            await createParticipant(student, classx, event, grade);
+            await createParticipant(student, classx, nutrition, grade);
             onHide();
-            setEvent(null);
+            setNutrition(null);
             setStudent(null);
             setClass(null);
             setGrade(null);
@@ -38,14 +38,14 @@ export default function CreateParticipantModal({ show, onHide }) {
         }        
     };
 
-    const handleEventChange = (value) => {
-        setEvent(value);
+    const handleNutritionChange = (value) => {
+        setNutrition(value);
 
-        const selectedEvent = events.find(eve => eve.event_id === parseInt(value, 10));
-        setSelectedEventType(selectedEvent ? selectedEvent.type : null);
+        const selectedNutrition = nutritions.find(eve => eve.nutrition_id === parseInt(value, 10));
+        setSelectedNutritionType(selectedNutrition ? selectedNutrition.type : null);
 
-        // Reset grade if the event type is not 'Конкурс' or 'Олимпиада'
-        if (selectedEvent && selectedEvent.type !== 'Конкурс' && selectedEvent.type !== 'Олимпиада') {
+        // Reset grade if the nutrition type is not 'Конкурс' or 'Олимпиада'
+        if (selectedNutrition && selectedNutrition.type !== 'Конкурс' && selectedNutrition.type !== 'Олимпиада') {
             setGrade(null);
         }
     };
@@ -70,8 +70,8 @@ export default function CreateParticipantModal({ show, onHide }) {
         }
     };
 
-    const isGradeRequired = selectedEventType === 'Конкурс' || selectedEventType === 'Олимпиада';
-    const isButtonDisabled = !event || (!student && !classx) || (isGradeRequired && !grade);
+    // const isGradeRequired = selectedNutritionType === 'Конкурс' || selectedNutritionType === 'Олимпиада';
+    // const isButtonDisabled = !nutrition || (!student && !classx) || (isGradeRequired && !grade);
 
     return (
         <Modal
@@ -87,10 +87,10 @@ export default function CreateParticipantModal({ show, onHide }) {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Select className="mt-2" value={event} onChange={e => handleEventChange(e.target.value)}>
-                        <option value="null">Select event</option>
-                        {events.map(eve => (
-                            <option key={eve.event_id} value={eve.event_id}>{eve.type} "{eve.name}"</option>
+                    <Form.Select className="mt-2" value={nutrition} onChange={e => handleNutritionChange(e.target.value)}>
+                        <option value="null">Select nutrition</option>
+                        {nutritions.map(eve => (
+                            <option key={eve.nutrition_id} value={eve.nutrition_id}>{eve.type} "{eve.name}"</option>
                         ))}
                     </Form.Select>
 
@@ -116,7 +116,7 @@ export default function CreateParticipantModal({ show, onHide }) {
                         ))}
                     </Form.Select>
 
-                    <Form.Select 
+                    {/* <Form.Select 
                         className="mt-2" 
                         value={grade} 
                         onChange={e => setGrade(e.target.value)} 
@@ -125,12 +125,12 @@ export default function CreateParticipantModal({ show, onHide }) {
                         <option value={1}>1</option>
                         <option value={2}>2</option>
                         <option value={3}>3</option>
-                    </Form.Select>
+                    </Form.Select> */}
                 </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-danger" onClick={onHide}>Close</Button>
-                <Button variant="outline-success" onClick={addParticipant} disabled={isButtonDisabled}>Add</Button>
+                {/* <Button variant="outline-success" onClick={addParticipant} disabled={isButtonDisabled}>Add</Button> */}
             </Modal.Footer>
         </Modal>
     );
