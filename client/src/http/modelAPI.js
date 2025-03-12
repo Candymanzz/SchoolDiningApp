@@ -63,18 +63,14 @@ export const deleteAttendance = async (id) => {
 
 export const createAndDownloadAttendPdf = async (date, classx, students, attendance) => {
     try {
-
         await $authHost.post('api/attendance/pdf', { date, classx, students, attendance });
-
         const res = await $authHost.get('api/attendance/pdf', { responseType: 'blob' });
-
         const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
         saveAs(pdfBlob, `attendance-report-(${date}).pdf`);
     } catch (error) {
         console.error("Error creating or downloading the PDF:", error);
     }
 };
-
 
 //Nutritions
 export const createNutritions = async (nutrition) => {
@@ -98,11 +94,8 @@ export const deleteNutritions = async (id) => {
 
 export const createAndDownloadNutritionsPdf = async (date, classx, students, attendance) => {
     try {
-
         await $authHost.post('api/attendance/pdf', { date, classx, students, attendance });
-
         const res = await $authHost.get('api/attendance/pdf', { responseType: 'blob' });
-
         const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
         saveAs(pdfBlob, `attendance-report-(${date}).pdf`);
     } catch (error) {
@@ -129,3 +122,9 @@ export const deleteParticipant = async (id) => {
     const { data } = await $authHost.delete('api/participant/' + id)
     return data
 }
+
+// Preferences
+export const fetchPreferences = async (page = 1, limit = 10) => {
+    const { data } = await $host.get('api/preference/', { params: { page, limit } });
+    return data;
+};
