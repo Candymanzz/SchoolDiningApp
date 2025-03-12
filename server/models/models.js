@@ -37,36 +37,18 @@ try {
     })
 
     const Participant = sequelize.define('participant', {
-        participant_id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
-        grade: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-        studentStudentId: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-        nutritionNutritionId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        classClassId: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        }
-    }, {
-        // indexes: [
-        //     {
-        //         fields: ['studentStudentId', 'nutritionNutritionId', 'classClassId'],
-        //     },
-        // ],
-        uniqueKeys: {},
-    });
+        participant_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+        grade: { type: DataTypes.INTEGER, allowNull: true },
+        studentStudentId: { type: DataTypes.INTEGER, allowNull: true },
+        nutritionNutritionId: { type: DataTypes.INTEGER, allowNull: false },
+        classClassId: { type: DataTypes.INTEGER, allowNull: true }
+    })
 
+    const Preference = sequelize.define('preference', {
+        preference_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+        student_id: { type: DataTypes.INTEGER, allowNull: false },
+        dish_name: { type: DataTypes.STRING, allowNull: false }
+    })
 
     Employee.hasOne(Class, { onDelete: 'cascade' })
     Class.belongsTo(Employee)
@@ -102,6 +84,9 @@ try {
         onDelete: 'cascade',
     });
 
+    Student.hasMany(Preference, { foreignKey: 'student_id', onDelete: 'cascade' })
+    Preference.belongsTo(Student, { foreignKey: 'student_id' })
+
     module.exports = {
         Employee,
         Class,
@@ -109,6 +94,7 @@ try {
         Attendance,
         Nutrition,
         Participant,
+        Preference
     }
 } catch (e) {
     console.log(e)
