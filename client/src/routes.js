@@ -5,7 +5,8 @@ import NutritionMenu from "./pages/NutritionMenu"
 import ClassMenu from "./pages/ClassMenu"
 import AttendanceMenu from "./pages/AttendanceMenu"
 import EmployeeListMenu from "./pages/EmployeeMenu"
-import { ADMIN_ROUTE, ATTENDANCE_ROUTE, CLASSES_ROUTE, NUTRITIONS_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, EMPLOYEES_ROUTE} from "./utils/consts"
+import PreferenceMenu from "./pages/PreferencesMenu"
+import { ADMIN_ROUTE, ATTENDANCE_ROUTE, CLASSES_ROUTE, NUTRITIONS_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, EMPLOYEES_ROUTE, PREFERENCE_ROUTE } from "./utils/consts"
 
 export const authRoutes = [
     {
@@ -41,6 +42,10 @@ export const publicRoutes = [
     },
     {
         path: ATTENDANCE_ROUTE,
+        Component: AttendanceMenu
+    },
+    {
+        path: PREFERENCE_ROUTE,
         Component: AttendanceMenu
     }
 ]
