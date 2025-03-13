@@ -124,7 +124,21 @@ export const deleteParticipant = async (id) => {
 }
 
 // Preferences
-export const fetchPreferences = async (page = 1, limit = 10) => {
-    const { data } = await $host.get('api/preference/', { params: { page, limit } });
-    return data;
-};
+export const createPreference = async (student_id, dish_name) => {
+    const { data } = await $authHost.post('api/preference/', { student_id, dish_name })
+    return data
+}
+
+export const fetchPreferences = async (page, limit) => {
+    const { data } = await $host.get('api/preference/', {
+        params: {
+            page, limit
+        }
+    })
+    return data
+}
+
+export const deletePreference = async (id) => {
+    const { data } = await $authHost.delete('api/preference/' + id)
+    return data
+}
