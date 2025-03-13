@@ -5,6 +5,7 @@ import studentsReducer from "./studentsSlice"
 import attendanceReducer from "./attendanceSlice"
 import nutritionsReducer from "./nutritionsSlice"
 import participantsReducer from "./participantsSlice"
+import preferencesSlice from "./preferencesSlice"
 
 const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
     students: studentsReducer,
     attendance: attendanceReducer,
     nutritions: nutritionsReducer,
-    participants: participantsReducer
+    participants: participantsReducer,
+    preferences: preferencesSlice
   },
 });
 
