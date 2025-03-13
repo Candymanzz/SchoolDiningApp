@@ -5,7 +5,7 @@ import ClassNutritionModal from './ClassNutritionModal';
 import { deleteClass } from '../http/modelAPI';
 import StudentItem from './StudentItem';
 
-export default function ClassItem({c, employees}) {
+export default function ClassItem({ c, employees }) {
     const { students } = useSelector((state) => {
         return state.students;
     })
@@ -17,7 +17,7 @@ export default function ClassItem({c, employees}) {
     const delClass = (classId) => {
         deleteClass(classId).finally(() => window.location.reload())
     }
-    
+
     return (
         <Accordion.Item eventKey={c.class_id}>
             <Accordion.Header className="d-flex justify-content-between">
@@ -46,8 +46,8 @@ export default function ClassItem({c, employees}) {
                     :
                     ''
                 }
-                <ClassNutritionModal 
-                    class_id = {c.class_id}
+                <ClassNutritionModal
+                    class_id={c.class_id}
                     show={modalShow}
                     onHide={() => setModalShow(false)}
                 />
@@ -55,3 +55,22 @@ export default function ClassItem({c, employees}) {
         </Accordion.Item>
     )
 }
+
+// import React from 'react';
+// import { ListGroup, Accordion } from 'react-bootstrap';
+// import { PreferenceItem } from "./PreferenceItem"
+
+// const PreferenceList = ({ preferences }) => {
+//     return (
+//         <ListGroup>
+//             {preferences.map((preference) => (
+//                 <ListGroup.Item key={preference.preference_id}>
+//                     {preference.student_name}: {preference.dish_name}
+//                 </ListGroup.Item>
+//             ))}
+//         </ListGroup>
+//     );
+// };
+
+// export default PreferenceList;
+
