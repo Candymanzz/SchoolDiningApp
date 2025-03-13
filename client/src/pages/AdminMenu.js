@@ -28,8 +28,7 @@ export default function AdminMenu() {
       <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateStudentVisible(true)}>Add student</Button>
       <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateAttendanceVisible(true)}>Add attendance</Button>
       <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateNutritionVisible(true)}>Add nutrition</Button>
-      <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreateParticipantVisible(true)}>Add participant</Button>
-      
+
       {employee.employee_id === "ADMIN" ?
         <Button variant={"outline-primary"} className="mt-4 p-2" onClick={() => setCreateEmployeeVisible(true)}>Add employee</Button>
         :
@@ -44,7 +43,7 @@ export default function AdminMenu() {
       <CreateClassModal show={createClassVisible} onHide={() => setCreateClassVisible(false)} />
       <CreateAttendanceModal show={createAttendanceVisible} onHide={() => setCreateAttendanceVisible(false)} />
       <CreateNutritionModal show={createNutritionVisible} onHide={() => setCreateNutritionVisible(false)} />
-        <CreateParticipantModal show={createParticipantVisible} onHide={() => setCreateParticipantVisible(false)} />
+      <CreateParticipantModal show={createParticipantVisible} onHide={() => setCreateParticipantVisible(false)} />
     </Container>
   )
 }
