@@ -4,19 +4,28 @@ const ApiError = require('../error/apiError')
 class PreferenceController {
     async create(req, res, next) {
         try {
-            const { student_id, dish_name } = req.body
+            const { student_id, dish_name } = req.body;
 
-            if (!student_id || !dish_name)
-                return next(ApiError.badRequest('Student ID and dish name are required'))
+            console.log('Received data:', { student_id, dish_name }); // Логируем входные данные
 
-            const student = await Student.findOne({ where: { student_id } })
-            if (!student)
-                return next(ApiError.badRequest('Incorrect student ID'))
+            if (!student_id || !dish_name) {
+                console.log('Student ID and dish name are required');
+                return next(ApiError.badRequest('Student ID and dish name are required'));
+            }
 
-            const preference = await Preference.create({ student_id, dish_name })
-            return res.json(preference)
+            const student = await Student.findOne({ where: { student_id } });
+            if (!student) {
+                console.log('Incorrect student ID:', student_id);
+                return next(ApiError.badRequest('Incorrect student ID'));
+            }
+
+            const preference = await Preference.create({ student_id, dish_name });
+            console.log('Preference created:', preference); // Логируем созданное предпочтение
+
+            return res.json(preference);
         } catch (e) {
-            next(ApiError.badRequest(e.message))
+            console.error('Error in create preference:', e.message); // Логируем ошибку
+            next(ApiError.badRequest(e.message));
         }
     }
 
