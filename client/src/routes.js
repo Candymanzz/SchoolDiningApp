@@ -46,6 +46,6 @@ export const publicRoutes = [
     },
     {
         path: PREFERENCE_ROUTE,
-        Component: AttendanceMenu
+        Component: PreferenceMenu
     }
 ]
