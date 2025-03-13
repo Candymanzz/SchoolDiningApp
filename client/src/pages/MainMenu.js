@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Form, Card, Button, Image } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom';
-import { ATTENDANCE_ROUTE, CLASSES_ROUTE, NUTRITIONS_ROUTE } from '../utils/consts';
+import { ATTENDANCE_ROUTE, CLASSES_ROUTE, NUTRITIONS_ROUTE, PREFERENCE_ROUTE } from '../utils/consts';
 import { seeding } from '../seeding';
 import { useSelector } from 'react-redux';
 
@@ -38,6 +38,13 @@ export default function MainMenu() {
                 <Button className="d-flex justify-content-between" variant={"outline-primary"} style={{ width: "100%" }}>
                   <Image width="20" src="./table.png" fluid />
                   <div style={{ marginRight: 20 }}>Nutrition</div>
+                  <div></div>
+                </Button>
+              </NavLink>
+              <NavLink to={PREFERENCE_ROUTE} className="mt-3" style={{ textDecoration: 'none' }}>
+                <Button className="d-flex justify-content-between" variant={"outline-primary"} style={{ width: "100%" }}>
+                  <Image width="20" src="./hat.png" fluid />
+                  <div style={{ marginRight: 20 }}>Preference</div>
                   <div></div>
                 </Button>
               </NavLink>
