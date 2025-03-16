@@ -1,4 +1,5 @@
 import { saveAs } from "file-saver"
+import axios from 'axios';
 import { $authHost, $host } from "./index"
 
 //Classes
@@ -63,12 +64,17 @@ export const deleteAttendance = async (id) => {
 
 export const createAndDownloadAttendPdf = async (date, classx, students, attendance) => {
     try {
-        await $authHost.post('api/attendance/pdf', { date, classx, students, attendance });
-        const res = await $authHost.get('api/attendance/pdf', { responseType: 'blob' });
+        const res = await axios.post('http://localhost:5000/api/attendance/pdf',
+            { date, classx, students, attendance },
+            { responseType: 'blob' } // ВАЖНО: получаем blob-файл
+        );
+
+        // Создаём Blob и сохраняем
         const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
-        saveAs(pdfBlob, `attendance-report-(${date}).pdf`);
+        saveAs(pdfBlob, `attendance-report-${date}.pdf`);
+
     } catch (error) {
-        console.error("Error creating or downloading the PDF:", error);
+        console.error("❌ Ошибка при скачивании PDF:", error);
     }
 };
 

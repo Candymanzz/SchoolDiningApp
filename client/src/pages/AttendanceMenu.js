@@ -8,16 +8,18 @@ import { setAttendance, setSelectedClass, setSelectedDate } from '../store/atten
 import { createAndDownloadAttendPdf, fetchAttendance, fetchClasses, fetchStudents } from '../http/modelAPI';
 import { setClasses } from '../store/classesSlice';
 import { setPage, setStudents, setTotalCount } from '../store/studentsSlice';
+import { saveAs } from 'file-saver';
+import axios from 'axios';
 
 const AttendanceMenu = () => {
   const { attendance, selectedDate, selectedClass } = useSelector(state => state.attendance);
   const { classes } = useSelector(state => state.classes);
   const { students, page, totalCount, limit } = useSelector(state => state.students);
-  
+
   const dispatch = useDispatch();
 
   const handleSelectedDate = (date) => {
-    const today = new Date().toISOString().split('T')[0]; 
+    const today = new Date().toISOString().split('T')[0];
     dispatch(setSelectedDate(date || today));
   };
 
@@ -53,7 +55,7 @@ const AttendanceMenu = () => {
   useEffect(() => {
     const fetchStudentsData = async () => {
       try {
-        const studentsData = selectedClass === "All" 
+        const studentsData = selectedClass === "All"
           ? await fetchStudents(null, page, 10)
           : await fetchStudents(selectedClass, page, 10);
 
@@ -82,7 +84,10 @@ const AttendanceMenu = () => {
             setClass={handleSelectedClass}
             selectedClass={selectedClass}
           />
-          <Button variant='outline-success' className="mt-2" onClick={() => {createAndDownloadAttendPdf(selectedDate, selectedClass, students, attendance)}}>Download report</Button>
+          <Button variant='outline-success' className="mt-2"
+            onClick={() => createAndDownloadAttendPdf(selectedDate, selectedClass, students, attendance)}>
+            Download report
+          </Button>
         </Col>
         <Col md={9} className="mt-2">
           <StudentsList students={students} attendance={attendance} selectedDate={selectedDate} />
