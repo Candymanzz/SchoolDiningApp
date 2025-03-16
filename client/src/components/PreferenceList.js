@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ListGroup, Spinner, Alert } from "react-bootstrap";
+import { fetchPreferences, fetchStudents } from "./Preferenceapi";
 
 const PreferenceList = () => {
     const [preferences, setPreferences] = useState([]);
@@ -8,20 +9,23 @@ const PreferenceList = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        Promise.all([
-            fetch("http://localhost:5000/api/preference").then((res) => res.json()),
-            fetch("http://localhost:5000/api/student").then((res) => res.json())
-        ])
-            .then(([preferencesData, studentsData]) => {
-                if (preferencesData.rows && studentsData.rows) {
-                    setPreferences(preferencesData.rows);
-                    setStudents(studentsData.rows);
-                } else {
-                    setError("Некорректный ответ от сервера");
-                }
-            })
-            .catch(() => setError("Ошибка загрузки данных"))
-            .finally(() => setLoading(false));
+        const fetchData = async () => {
+            try {
+                const [preferencesData, studentsData] = await Promise.all([
+                    fetchPreferences(),
+                    fetchStudents()
+                ]);
+
+                setPreferences(preferencesData);
+                setStudents(studentsData);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
     }, []);
 
     if (loading) return <Spinner animation="border" />;
@@ -34,7 +38,6 @@ const PreferenceList = () => {
             </ListGroup.Item>
             {preferences.length > 0 ? (
                 preferences.map((preference) => {
-                    // Найти студента по student_id
                     const student = students.find(std => std.student_id === preference.student_id);
                     return (
                         <ListGroup.Item key={preference.preference_id}>
