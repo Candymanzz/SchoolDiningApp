@@ -1,5 +1,6 @@
-const { Preference, Student } = require('../models/models')
-const ApiError = require('../error/apiError')
+// preferenceController.js
+import { Preference, Student } from '../models/models.js'; // Используем ES модули
+import ApiError from '../error/apiError.js'; // Используем ES модули
 
 class PreferenceController {
     async create(req, res, next) {
@@ -31,28 +32,28 @@ class PreferenceController {
 
     async delete(req, res, next) {
         try {
-            const { preference_id } = req.params
-            const preference = await Preference.findOne({ where: { preference_id } })
+            const { preference_id } = req.params;
+            const preference = await Preference.findOne({ where: { preference_id } });
 
             if (!preference)
-                return next(ApiError.badRequest('Incorrect preference ID'))
+                return next(ApiError.badRequest('Incorrect preference ID'));
 
-            await Preference.destroy({ where: { preference_id } })
-            return res.json({ message: 'Preference deleted successfully' })
+            await Preference.destroy({ where: { preference_id } });
+            return res.json({ message: 'Preference deleted successfully' });
         } catch (e) {
-            next(ApiError.badRequest(e.message))
+            next(ApiError.badRequest(e.message));
         }
     }
 
     async getAll(req, res) {
-        let { limit, page } = req.query
-        page = page || 1
-        limit = limit || 10
-        let offset = (page - 1) * limit
+        let { limit, page } = req.query;
+        page = page || 1;
+        limit = limit || 10;
+        let offset = (page - 1) * limit;
 
-        const preferences = await Preference.findAndCountAll({ limit, offset })
-        return res.json(preferences)
+        const preferences = await Preference.findAndCountAll({ limit, offset });
+        return res.json(preferences);
     }
 }
 
-module.exports = new PreferenceController()
+export default new PreferenceController(); // Используем default export

@@ -1,27 +1,27 @@
-const uuid = require('uuid')
-const path = require('path')
-const ApiError = require("../error/apiError")
-const { Nutrition } = require("../models/models")
-const fs = require('fs')
-const { Op } = require('sequelize');
-const pdfTemplate = require('../documents/attendpdf')
-const pdf = require('html-pdf')
+import { v4 as uuidv4 } from 'uuid'; // Используем named export
+import path from 'path';
+import ApiError from "../error/apiError.js"; // Используем ES модули
+import { Nutrition } from "../models/models.js"; // Используем ES модули
+import fs from 'fs';
+import { Op } from 'sequelize';
+import pdfTemplate from '../documents/attendpdf.js'; // Используем ES модули
+import pdf from 'html-pdf';
 
 class NutritionController {
     async create(req, res, next) {
         try {
             const { name, date, type } = req.body;
             let fileName = null;
-    
+
             if (req.files && req.files.file) {
                 const { file } = req.files;
-                fileName = uuid.v4() + "." + file.name.substr(file.name.length - 3);
+                fileName = uuidv4() + "." + file.name.substr(file.name.length - 3); // Используем uuidv4
                 file.mv(path.resolve(__dirname, '..', 'static', fileName));
             }
-    
+
             const nutrition = await Nutrition.create({ name, date, type, file: fileName });
-    
-            return res.json(Nutrition);
+
+            return res.json(nutrition);
         } catch (e) {
             next(ApiError.internal(e.message));
         }
@@ -29,19 +29,19 @@ class NutritionController {
 
     async delete(req, res, next) {
         try {
-            const { nutrition_id } = req.params
+            const { nutrition_id } = req.params;
             const nutrition = await Nutrition.findOne(
                 { where: { nutrition_id: nutrition_id } },
-            )
-            if (!nutrition) return next(ApiError.badRequest('Incorrect nutrition id'))
+            );
+            if (!nutrition) return next(ApiError.badRequest('Incorrect nutrition id'));
             await Nutrition.destroy(
                 { where: { nutrition_id: nutrition_id } },
-            )
-            var file_path = path.resolve(__dirname, '..', 'static', nutrition.file)
-            fs.unlink(file_path, function (err) {})
-            return res.json()
+            );
+            const file_path = path.resolve(__dirname, '..', 'static', nutrition.file);
+            fs.unlink(file_path, function (err) { });
+            return res.json();
         } catch (e) {
-            next(ApiError.internal(e.message))
+            next(ApiError.internal(e.message));
         }
     }
 
@@ -50,16 +50,16 @@ class NutritionController {
         page = page || 1;
         limit = limit || 9;
         let offset = (page - 1) * limit;
-    
+
         let whereClause = {};
-    
+
         if (dateFrom) {
-            whereClause.date = { ...whereClause.date, [Op.gte]: dateFrom }; 
+            whereClause.date = { ...whereClause.date, [Op.gte]: dateFrom };
         }
         if (dateTo) {
-            whereClause.date = { ...whereClause.date, [Op.lte]: dateTo }; 
+            whereClause.date = { ...whereClause.date, [Op.lte]: dateTo };
         }
-    
+
         try {
             const nutritions = await Nutrition.findAndCountAll({
                 where: whereClause,
@@ -73,14 +73,13 @@ class NutritionController {
             return res.status(500).json({ error: 'An error occurred while fetching nutritions' });
         }
     }
-    
 
     async getOne(req, res) {
-        const { nutrition_id } = req.params
+        const { nutrition_id } = req.params;
         const nutrition = await Nutrition.findOne(
             { where: { nutrition_id } },
-        )
-        return res.json(nutrition)
+        );
+        return res.json(nutrition);
     }
 
     async createPdf(req, res) {
@@ -105,4 +104,4 @@ class NutritionController {
     }
 }
 
-module.exports = new NutritionController()
+export default new NutritionController(); // Используем default export

@@ -1,13 +1,15 @@
-const Router = require('express')
-const router = new Router()
-const nutritionController = require('../controllers/nutritionController')
-const authMiddleware = require('../middleware/authMiddleware')
+// nutritionRouter.js
+import { Router } from 'express';
+const router = new Router();
 
-router.post('/', authMiddleware, nutritionController.create)
-router.post('/pdf', authMiddleware, nutritionController.createPdf)
-router.get('/pdf', authMiddleware, nutritionController.getPdf)
-router.delete('/:nutrition_id', authMiddleware, nutritionController.delete)
-router.get('/', nutritionController.getAll)
-//router.get('/:nutrition_id', nutritionController.getOne)
+import nutritionController from '../controllers/nutritionController.js'; // Используем ES модули
+import authMiddleware from '../middleware/authMiddleware.js'; // Используем ES модули
 
-module.exports = router
+router.post('/', authMiddleware, nutritionController.create);
+router.post('/pdf', authMiddleware, nutritionController.createPdf);
+router.get('/pdf', authMiddleware, nutritionController.getPdf);
+router.delete('/:nutrition_id', authMiddleware, nutritionController.delete);
+router.get('/', nutritionController.getAll);
+// router.get('/:nutrition_id', nutritionController.getOne);
+
+export default router; // Используем default export

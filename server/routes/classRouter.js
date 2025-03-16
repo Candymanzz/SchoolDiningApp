@@ -1,10 +1,12 @@
-const Router = require('express')
-const router = new Router()
-const classController = require('../controllers/classController')
-const authMiddleware = require('../middleware/authMiddleware')
+// classRouter.js
+import { Router } from 'express';
+const router = new Router();
 
-router.post('/', authMiddleware, classController.create)
-router.delete('/:class_id', authMiddleware, classController.delete)
-router.get('/', classController.getAll)
+import classController from '../controllers/classController.js';
+import authMiddleware from '../middleware/authMiddleware.js';
 
-module.exports = router
+router.post('/', authMiddleware, classController.create);
+router.delete('/:class_id', authMiddleware, classController.delete);
+router.get('/', classController.getAll);
+
+export default router; // Используем default export

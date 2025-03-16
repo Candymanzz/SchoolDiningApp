@@ -1,12 +1,17 @@
-const { Sequelize } = require('sequelize')
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
-module.exports = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
+dotenv.config(); // Загружаем переменные окружения
+
+const sequelize = new Sequelize(
+    process.env.DB_NAME, // Имя базы данных
+    process.env.DB_USER, // Пользователь
+    process.env.DB_PASSWORD, // Пароль
     {
-        dialect: 'postgres',
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT
+        host: process.env.DB_HOST, // Хост (localhost или IP)
+        port: process.env.DB_PORT, // Порт (5432 по умолчанию)
+        dialect: "postgres",
     }
-)
+);
+
+export default sequelize;

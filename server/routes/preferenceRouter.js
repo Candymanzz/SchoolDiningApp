@@ -1,10 +1,12 @@
-const Router = require('express')
-const router = new Router()
-const preferenceController = require('../controllers/preferenceController')
-const authMiddleware = require('../middleware/authMiddleware')
+// preferenceRouter.js
+import { Router } from 'express';
+const router = new Router();
 
-router.post('/', authMiddleware, preferenceController.create)
-router.delete('/:preference_id', authMiddleware, preferenceController.delete)
-router.get('/', preferenceController.getAll)
+import preferenceController from '../controllers/preferenceController.js'; // Используем ES модули
+import authMiddleware from '../middleware/authMiddleware.js'; // Используем ES модули
 
-module.exports = router
+router.post('/', authMiddleware, preferenceController.create);
+router.delete('/:preference_id', authMiddleware, preferenceController.delete);
+router.get('/', preferenceController.getAll);
+
+export default router; // Используем default export

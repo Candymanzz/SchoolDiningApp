@@ -1,5 +1,5 @@
-module.exports = ({ employee, nutritions, participants, students, classes }) => {
-
+// nutritionspdf.js
+export default ({ employee, nutritions, participants, students, classes }) => {
     return `
         <!doctype html>
         <html>

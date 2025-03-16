@@ -1,10 +1,12 @@
-const Router = require('express')
-const router = new Router()
-const participantController = require('../controllers/participantController')
-const authMiddleware = require('../middleware/authMiddleware')
+// participantRouter.js
+import { Router } from 'express';
+const router = new Router();
 
-router.post('/', authMiddleware, participantController.create)
-router.delete('/:participant_id', participantController.delete)
-router.get('/', participantController.getAll)
+import participantController from '../controllers/participantController.js'; // Используем ES модули
+import authMiddleware from '../middleware/authMiddleware.js'; // Используем ES модули
 
-module.exports = router
+router.post('/', authMiddleware, participantController.create);
+router.delete('/:participant_id', participantController.delete);
+router.get('/', participantController.getAll);
+
+export default router; // Используем default export
