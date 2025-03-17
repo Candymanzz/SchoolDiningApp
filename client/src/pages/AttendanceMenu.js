@@ -84,10 +84,6 @@ const AttendanceMenu = () => {
             setClass={handleSelectedClass}
             selectedClass={selectedClass}
           />
-          <Button variant='outline-success' className="mt-2"
-            onClick={() => createAndDownloadAttendPdf(selectedDate, selectedClass, students, attendance)}>
-            Download report
-          </Button>
         </Col>
         <Col md={9} className="mt-2">
           <StudentsList students={students} attendance={attendance} selectedDate={selectedDate} />
