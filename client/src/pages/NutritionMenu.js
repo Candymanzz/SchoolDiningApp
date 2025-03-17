@@ -11,11 +11,11 @@ import { setParticipants } from '../store/participantsSlice';
 
 export default function NutritionMenu() {
   const { selectedDateFrom, selectedDateTo, page, totalCount, limit } = useSelector(state => state.nutritions);
-      const { employee } = useSelector(state => state.employees);
-      const { nutritions } = useSelector(state => state.nutritions);
-      const { participants } = useSelector(state => state.participants)
-      const { students } = useSelector(state => state.students);
-      const { classes } = useSelector(state => state.classes);
+  const { employee } = useSelector(state => state.employees);
+  const { nutritions } = useSelector(state => state.nutritions);
+  const { participants } = useSelector(state => state.participants)
+  const { students } = useSelector(state => state.students);
+  const { classes } = useSelector(state => state.classes);
 
   const dispatch = useDispatch();
 
@@ -96,10 +96,9 @@ export default function NutritionMenu() {
             value={selectedDateTo}
             onChange={e => handleSelectedDateTo(e.target.value)}
           />
-          <Button variant='outline-success' className="mt-2" onClick={() => {createAndDownloadNutritionsPdf(employee, nutritions, participants, students, classes)}}>Download report</Button>
         </Col>
         <Col md={9} className="mt-2">
-          <NutritionsList employee = {employee} nutritions = {nutritions} participants={participants} students={students} classes={classes} />
+          <NutritionsList employee={employee} nutritions={nutritions} participants={participants} students={students} classes={classes} />
           <Pages totalCount={totalCount} limit={limit} page={page} handlePage={(p) => handlePage(p)} />
         </Col>
       </Row>
