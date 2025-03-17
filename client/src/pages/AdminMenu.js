@@ -10,6 +10,7 @@ import CreateAttendanceModal from '../components/Admin/CreateAttendanceModal';
 import CreateNutritionModal from '../components/Admin/CreateNutritionModal';
 import CreateParticipantModal from '../components/Admin/CreateParticipantModal';
 import CreatePreferenceModal from '../components/Admin/CreatePreferenceModal';
+import Reports from '../pages/Reports';
 
 export default function AdminMenu() {
   const { employee } = useSelector((state) => {
@@ -40,6 +41,8 @@ export default function AdminMenu() {
       <NavLink to={EMPLOYEES_ROUTE} style={{ textDecoration: 'none' }} >
         <Button variant={"outline-primary"} className="mt-4 p-2" style={{ width: "100%" }}>View employees</Button>
       </NavLink>
+
+      <Reports />
 
       <CreateEmployeeModal show={createEmployeeVisible} onHide={() => setCreateEmployeeVisible(false)} />
       <CreateStudentModal show={createStudentVisible} onHide={() => setCreateStudentVisible(false)} />
