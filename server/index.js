@@ -15,6 +15,7 @@ import router from './routes/index.js'; // Adjust the file extension if necessar
 import errorHandler from './middleware/errorHandlingMiddleware.js'; // Adjust the file extension if necessary
 import path from 'path';
 import bodyParser from 'body-parser';
+import reportsRouter from './routes/reports.js'
 
 const PORT = process.env.PORT || 7000;
 
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use(fileUpload({}));
 app.use(express.static(path.resolve(__dirname, 'static')));
 app.use('/api', router);
+app.use('/api/reports', reportsRouter);
 
 app.use(errorHandler);
 
