@@ -7,12 +7,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 
-import express from 'express'; // Add this line
-import sequelize from './db.js'; // Adjust the file extension if necessary
+import express from 'express';
+import sequelize from './db.js';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
-import router from './routes/index.js'; // Adjust the file extension if necessary
-import errorHandler from './middleware/errorHandlingMiddleware.js'; // Adjust the file extension if necessary
+import router from './routes/index.js';
+import errorHandler from './middleware/errorHandlingMiddleware.js';
 import path from 'path';
 import bodyParser from 'body-parser';
 import reportsRouter from './routes/reports.js'

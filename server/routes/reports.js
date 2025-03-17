@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { Attendance, Nutrition } from '../models/models.js';
-import * as fontkit from 'fontkit'; // Используем named exports
+import * as fontkit from 'fontkit';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,16 +23,13 @@ router.get('/generate-pdf', async (req, res) => {
             return res.status(404).json({ message: 'Нет данных для отчета' });
         }
 
-        // Создаем PDF-документ
         const pdfDoc = await PDFDocument.create();
         pdfDoc.registerFontkit(fontkit);
 
-        // Добавляем страницу с увеличенной высотой
         let page = pdfDoc.addPage([600, 1200]);
         const { width, height } = page.getSize();
 
-        // Загружаем кастомный шрифт (например, Arial)
-        const fontPath = path.join(__dirname, '../fonts/arialmt.ttf'); // Убедитесь, что файл существует
+        const fontPath = path.join(__dirname, '../fonts/arialmt.ttf');
         if (!fs.existsSync(fontPath)) {
             console.error('Шрифт не найден по пути:', fontPath);
             return res.status(500).json({ message: 'Шрифт не найден' });
@@ -41,15 +38,13 @@ router.get('/generate-pdf', async (req, res) => {
         const fontBytes = fs.readFileSync(fontPath);
         const customFont = await pdfDoc.embedFont(fontBytes);
 
-        let y = height - 50; // Начальная позиция Y
+        let y = height - 50;
 
-        // Добавляем заголовок для посещаемости
         page.drawText('Отчет по посещаемости', { x: 50, y, size: 18, font: customFont, color: rgb(0, 0, 0) });
         y -= 30;
 
-        // Добавляем данные о посещаемости
         attendanceList.forEach(attendance => {
-            if (y < 50) { // Если Y выходит за пределы страницы, добавляем новую страницу
+            if (y < 50) {
                 const newPage = pdfDoc.addPage([600, 1200]);
                 y = newPage.getSize().height - 50;
                 page = newPage;
@@ -60,15 +55,13 @@ router.get('/generate-pdf', async (req, res) => {
             y -= 20;
         });
 
-        y -= 20; // Отступ между разделами
+        y -= 20;
 
-        // Добавляем заголовок для питания
         page.drawText('Отчет по питанию', { x: 50, y, size: 18, font: customFont, color: rgb(0, 0, 0) });
         y -= 30;
 
-        // Добавляем данные о питании
         nutritionList.forEach(nutrition => {
-            if (y < 50) { // Если Y выходит за пределы страницы, добавляем новую страницу
+            if (y < 50) {
                 const newPage = pdfDoc.addPage([600, 1200]);
                 y = newPage.getSize().height - 50;
                 page = newPage;
@@ -79,13 +72,10 @@ router.get('/generate-pdf', async (req, res) => {
             y -= 20;
         });
 
-        // Сохраняем PDF
         const pdfBytes = await pdfDoc.save();
 
-        // Сохраняем PDF в файл для проверки
         fs.writeFileSync('test.pdf', pdfBytes);
 
-        // Отправляем PDF клиенту
         res.setHeader('Content-Disposition', 'attachment; filename=report.pdf');
         res.setHeader('Content-Type', 'application/pdf');
         res.send(pdfBytes);

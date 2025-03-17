@@ -1,6 +1,5 @@
-// models.js
 import { Sequelize, DataTypes } from 'sequelize';
-import sequelize from '../db.js'; // Импортируем sequelize
+import sequelize from '../db.js';
 
 const Employee = sequelize.define('employee', {
     employee_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
