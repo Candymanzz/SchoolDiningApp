@@ -98,12 +98,12 @@ export const deleteNutritions = async (id) => {
     return data
 }
 
-export const createAndDownloadNutritionsPdf = async (date, classx, students, attendance) => {
+export const createAndDownloadNutritionsPdf = async (employee, nutritions, participants, students, classes) => {
     try {
-        await $authHost.post('api/attendance/pdf', { date, classx, students, attendance });
-        const res = await $authHost.get('api/attendance/pdf', { responseType: 'blob' });
+        await $authHost.post('api/nutrition/pdf', { employee, nutritions, participants, students, classes });
+        const res = await $authHost.get('api/nutrition/pdf', { responseType: 'blob' });
         const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
-        saveAs(pdfBlob, `attendance-report-(${date}).pdf`);
+        saveAs(pdfBlob, `nutrition-report-${new Date().toISOString().split('T')[0]}.pdf`);
     } catch (error) {
         console.error("Error creating or downloading the PDF:", error);
     }
