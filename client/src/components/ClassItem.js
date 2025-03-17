@@ -55,22 +55,3 @@ export default function ClassItem({ c, employees }) {
         </Accordion.Item>
     )
 }
-
-// import React from 'react';
-// import { ListGroup, Accordion } from 'react-bootstrap';
-// import { PreferenceItem } from "./PreferenceItem"
-
-// const PreferenceList = ({ preferences }) => {
-//     return (
-//         <ListGroup>
-//             {preferences.map((preference) => (
-//                 <ListGroup.Item key={preference.preference_id}>
-//                     {preference.student_name}: {preference.dish_name}
-//                 </ListGroup.Item>
-//             ))}
-//         </ListGroup>
-//     );
-// };
-
-// export default PreferenceList;
-

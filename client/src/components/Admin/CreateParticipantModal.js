@@ -7,7 +7,7 @@ export default function CreateParticipantModal({ show, onHide }) {
     const [student, setStudent] = useState(null);
     const [classx, setClass] = useState(null);
     const [grade, setGrade] = useState(null);
-    const [selectedNutritionType, setSelectedNutritionType] = useState(null); // Track selected nutrition type
+    const [selectedNutritionType, setSelectedNutritionType] = useState(null);
 
     const [nutritions, setNutritions] = useState([]);
     const [students, setStudents] = useState([]);
@@ -35,7 +35,7 @@ export default function CreateParticipantModal({ show, onHide }) {
             setGrade(null);
         } catch (e) {
             alert(e.response.data.message);
-        }        
+        }
     };
 
     const handleNutritionChange = (value) => {
@@ -44,8 +44,7 @@ export default function CreateParticipantModal({ show, onHide }) {
         const selectedNutrition = nutritions.find(eve => eve.nutrition_id === parseInt(value, 10));
         setSelectedNutritionType(selectedNutrition ? selectedNutrition.type : null);
 
-        // Reset grade if the nutrition type is not 'Конкурс' or 'Олимпиада'
-        if (selectedNutrition && selectedNutrition.type !== 'Конкурс' && selectedNutrition.type !== 'Олимпиада') {
+        if (selectedNutrition && selectedNutrition.type !== '' && selectedNutrition.type !== '') {
             setGrade(null);
         }
     };
@@ -70,9 +69,6 @@ export default function CreateParticipantModal({ show, onHide }) {
         }
     };
 
-    // const isGradeRequired = selectedNutritionType === 'Конкурс' || selectedNutritionType === 'Олимпиада';
-    // const isButtonDisabled = !nutrition || (!student && !classx) || (isGradeRequired && !grade);
-
     return (
         <Modal
             show={show}
@@ -94,10 +90,10 @@ export default function CreateParticipantModal({ show, onHide }) {
                         ))}
                     </Form.Select>
 
-                    <Form.Select 
-                        className="mt-2" 
-                        value={student} 
-                        onChange={e => handleStudentChange(e.target.value)} 
+                    <Form.Select
+                        className="mt-2"
+                        value={student}
+                        onChange={e => handleStudentChange(e.target.value)}
                         disabled={classx !== null}>
                         <option value="null">Select student</option>
                         {students.map(std => (
@@ -105,10 +101,10 @@ export default function CreateParticipantModal({ show, onHide }) {
                         ))}
                     </Form.Select>
 
-                    <Form.Select 
-                        className="mt-2" 
-                        value={classx} 
-                        onChange={e => handleClassChange(e.target.value)} 
+                    <Form.Select
+                        className="mt-2"
+                        value={classx}
+                        onChange={e => handleClassChange(e.target.value)}
                         disabled={student !== null}>
                         <option value="null">Select class</option>
                         {classes.map(cls => (
