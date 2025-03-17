@@ -1,7 +1,6 @@
-// attendanceController.js
-import ApiError from "../error/apiError.js"; // Используем ES модули
-import { Attendance, Student } from "../models/models.js"; // Теперь это работает
-import pdfTemplate from '../documents/nutritionspdf.js'; // Используем ES модули
+import ApiError from "../error/apiError.js";
+import { Attendance, Student } from "../models/models.js";
+import pdfTemplate from '../documents/nutritionspdf.js';
 import pdf from 'html-pdf';
 import path from 'path';
 import fs from 'fs';
@@ -74,4 +73,4 @@ class AttendanceController {
     }
 }
 
-export default new AttendanceController(); // Используем default export
+export default new AttendanceController();

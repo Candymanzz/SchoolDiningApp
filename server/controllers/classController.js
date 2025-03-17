@@ -1,6 +1,5 @@
-// classController.js
-import { Class, Employee } from '../models/models.js'; // Используем ES модули
-import ApiError from '../error/apiError.js'; // Используем ES модули
+import { Class, Employee } from '../models/models.js';
+import ApiError from '../error/apiError.js';
 
 class ClassController {
     async create(req, res, next) {
@@ -49,4 +48,4 @@ class ClassController {
     }
 }
 
-export default new ClassController(); // Используем default export
+export default new ClassController();

@@ -1,8 +1,7 @@
-// employeeController.js
-import ApiError from '../error/apiError.js'; // Используем ES модули
+import ApiError from '../error/apiError.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { Employee } from '../models/models.js'; // Используем ES модули
+import { Employee } from '../models/models.js';
 
 const generateJwt = (employee_id, email) => {
     return jwt.sign({ employee_id, email }, process.env.SECRET_KEY, { expiresIn: '24h' });
@@ -79,4 +78,4 @@ class EmployeeController {
     }
 }
 
-export default new EmployeeController(); // Используем default export
+export default new EmployeeController();

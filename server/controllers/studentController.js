@@ -1,6 +1,5 @@
-// studentController.js
-import ApiError from "../error/apiError.js"; // Используем ES модули
-import { Class, Student } from "../models/models.js"; // Используем ES модули
+import ApiError from "../error/apiError.js";
+import { Class, Student } from "../models/models.js";
 
 class StudentController {
     async create(req, res, next) {
@@ -60,4 +59,4 @@ class StudentController {
     }
 }
 
-export default new StudentController(); // Используем default export
+export default new StudentController();

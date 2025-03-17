@@ -1,13 +1,12 @@
-// preferenceController.js
-import { Preference, Student } from '../models/models.js'; // Используем ES модули
-import ApiError from '../error/apiError.js'; // Используем ES модули
+import { Preference, Student } from '../models/models.js';
+import ApiError from '../error/apiError.js';
 
 class PreferenceController {
     async create(req, res, next) {
         try {
             const { student_id, dish_name } = req.body;
 
-            console.log('Received data:', { student_id, dish_name }); // Логируем входные данные
+            console.log('Received data:', { student_id, dish_name });
 
             if (!student_id || !dish_name) {
                 console.log('Student ID and dish name are required');
@@ -21,11 +20,11 @@ class PreferenceController {
             }
 
             const preference = await Preference.create({ student_id, dish_name });
-            console.log('Preference created:', preference); // Логируем созданное предпочтение
+            console.log('Preference created:', preference);
 
             return res.json(preference);
         } catch (e) {
-            console.error('Error in create preference:', e.message); // Логируем ошибку
+            console.error('Error in create preference:', e.message);
             next(ApiError.badRequest(e.message));
         }
     }
@@ -56,4 +55,4 @@ class PreferenceController {
     }
 }
 
-export default new PreferenceController(); // Используем default export
+export default new PreferenceController(); 

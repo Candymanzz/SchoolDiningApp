@@ -1,6 +1,5 @@
-// participantController.js
-import ApiError from "../error/apiError.js"; // Используем ES модули
-import { Nutrition, Student, Class, Participant } from "../models/models.js"; // Используем ES модули
+import ApiError from "../error/apiError.js";
+import { Nutrition, Student, Class, Participant } from "../models/models.js";
 
 class ParticipantController {
     async create(req, res, next) {
@@ -62,4 +61,4 @@ class ParticipantController {
     }
 }
 
-export default new ParticipantController(); // Используем default export
+export default new ParticipantController();

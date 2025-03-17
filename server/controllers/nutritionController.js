@@ -1,14 +1,13 @@
-import { v4 as uuidv4 } from 'uuid'; // Используем named export
+import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import ApiError from "../error/apiError.js"; // Используем ES модули
-import { Nutrition } from "../models/models.js"; // Используем ES модули
+import ApiError from "../error/apiError.js";
+import { Nutrition } from "../models/models.js";
 import fs from 'fs';
 import { Op } from 'sequelize';
-import pdfTemplate from '../documents/nutritionspdf.js'; // Исправляем импорт шаблона
+import pdfTemplate from '../documents/nutritionspdf.js';
 import pdf from 'html-pdf';
 
-// Получаем __dirname для ES модулей
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -20,7 +19,7 @@ class NutritionController {
 
             if (req.files && req.files.file) {
                 const { file } = req.files;
-                fileName = uuidv4() + "." + file.name.substr(file.name.length - 3); // Используем uuidv4
+                fileName = uuidv4() + "." + file.name.substr(file.name.length - 3);
                 file.mv(path.resolve(__dirname, '..', 'static', fileName));
             }
 
@@ -89,10 +88,8 @@ class NutritionController {
 
     async createPdf(req, res) {
         try {
-            // Получаем данные из запроса
             const { nutritions, participants } = req.body;
 
-            // Проверяем наличие данных
             if (!nutritions || !Array.isArray(nutritions)) {
                 return res.status(400).json({
                     message: "Отсутствуют данные о питании",
@@ -100,7 +97,6 @@ class NutritionController {
                 });
             }
 
-            // Группируем данные по дате и названию
             const groupedNutritions = nutritions.reduce((acc, nutrition) => {
                 const key = `${nutrition.date}_${nutrition.name}`;
                 if (!acc[key]) {
@@ -112,7 +108,6 @@ class NutritionController {
                 return acc;
             }, {});
 
-            // Распределяем участников по группам
             participants.forEach(participant => {
                 nutritions.forEach(nutrition => {
                     const key = `${nutrition.date}_${nutrition.name}`;
@@ -125,7 +120,6 @@ class NutritionController {
                 });
             });
 
-            // Создаем HTML шаблон
             const html = `
                 <!DOCTYPE html>
                 <html>
@@ -189,15 +183,13 @@ class NutritionController {
                 </html>
             `;
 
-            // Настройки для PDF
             const options = {
                 format: 'A4',
                 orientation: 'portrait',
                 border: '10mm',
-                timeout: 30000 // Увеличиваем таймаут до 30 секунд
+                timeout: 30000
             };
 
-            // Создаем PDF
             const pdfPath = path.join(__dirname, '..', 'nutritions.pdf');
 
             await new Promise((resolve, reject) => {
@@ -212,7 +204,6 @@ class NutritionController {
                 });
             });
 
-            // Отправляем успешный ответ
             res.status(200).json({
                 message: "PDF успешно создан",
                 path: pdfPath
@@ -231,7 +222,6 @@ class NutritionController {
         try {
             const filePath = path.join(__dirname, '..', 'nutritions.pdf');
 
-            // Проверяем существование файла
             if (!fs.existsSync(filePath)) {
                 return res.status(404).json({
                     message: "PDF файл не найден",
@@ -239,7 +229,6 @@ class NutritionController {
                 });
             }
 
-            // Отправляем файл
             res.sendFile(filePath, (err) => {
                 if (err) {
                     console.error('Ошибка при отправке файла:', err);
@@ -259,4 +248,4 @@ class NutritionController {
     }
 }
 
-export default new NutritionController(); // Используем default export
+export default new NutritionController();
