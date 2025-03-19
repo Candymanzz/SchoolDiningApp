@@ -21,7 +21,14 @@ const generateRandomDish = () => {
 
 export const seedDatabase = async () => {
     try {
-        // Создаем сотрудников
+        await Preference.destroy({ where: {} });
+        await Participant.destroy({ where: {} });
+        await Attendance.destroy({ where: {} });
+        await Nutrition.destroy({ where: {} });
+        await Student.destroy({ where: {} });
+        await Class.destroy({ where: {} });
+        await Employee.destroy({ where: {} });
+
         const employees = [];
         for (let i = 0; i < 50; i++) {
             const { name, surname } = generateRandomName();
@@ -39,7 +46,6 @@ export const seedDatabase = async () => {
             employees.push(employee);
         }
 
-        // Создаем классы
         const classes = [];
         for (let i = 0; i < 50; i++) {
             const classData = await Class.create({
@@ -49,7 +55,6 @@ export const seedDatabase = async () => {
             classes.push(classData);
         }
 
-        // Создаем учеников
         const students = [];
         for (let i = 0; i < 50; i++) {
             const { name, surname } = generateRandomName();
@@ -61,7 +66,6 @@ export const seedDatabase = async () => {
             students.push(student);
         }
 
-        // Создаем посещаемость
         for (let i = 0; i < 50; i++) {
             await Attendance.create({
                 status: Math.random() > 0.2,
@@ -70,7 +74,6 @@ export const seedDatabase = async () => {
             });
         }
 
-        // Создаем питание
         const nutritions = [];
         for (let i = 0; i < 50; i++) {
             const nutrition = await Nutrition.create({
@@ -81,7 +84,6 @@ export const seedDatabase = async () => {
             nutritions.push(nutrition);
         }
 
-        // Создаем участников питания
         for (let i = 0; i < 50; i++) {
             await Participant.create({
                 grade: Math.floor(Math.random() * 5) + 1,
@@ -91,16 +93,13 @@ export const seedDatabase = async () => {
             });
         }
 
-        // Создаем предпочтения
+
         for (let i = 0; i < 50; i++) {
             await Preference.create({
                 student_id: students[Math.floor(Math.random() * students.length)].student_id,
                 dish_name: generateRandomDish()
             });
         }
-
-        console.log('База данных успешно заполнена тестовыми данными');
     } catch (error) {
-        console.error('Ошибка при заполнении базы данных:', error);
     }
 }; 
