@@ -16,6 +16,7 @@ import errorHandler from './middleware/errorHandlingMiddleware.js';
 import path from 'path';
 import bodyParser from 'body-parser';
 import reportsRouter from './routes/reports.js'
+import { seedDatabase } from './utils/seedData.js';
 
 const PORT = process.env.PORT || 7000;
 
@@ -35,6 +36,7 @@ const start = async () => {
     try {
         await sequelize.authenticate();
         await sequelize.sync();
+        await seedDatabase();
         app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
     } catch (e) {
         console.log(e);
