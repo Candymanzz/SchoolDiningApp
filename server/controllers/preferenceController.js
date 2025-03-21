@@ -50,7 +50,15 @@ class PreferenceController {
         limit = limit || 10;
         let offset = (page - 1) * limit;
 
-        const preferences = await Preference.findAndCountAll({ limit, offset });
+        const preferences = await Preference.findAndCountAll({
+            include: [{
+                model: Student,
+                as: 'student',
+                attributes: ['name', 'surname']
+            }],
+            limit,
+            offset
+        });
         return res.json(preferences);
     }
 }
