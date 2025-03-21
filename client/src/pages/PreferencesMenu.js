@@ -26,7 +26,6 @@ export default function PreferenceMenu() {
             <Row className="mt-2">
                 <Col className="mt-2">
                     <PreferenceList preferences={preferences} />
-                    <Pages totalCount={totalCount} limit={limit} page={page} handlePage={handlePage} />
                 </Col>
             </Row>
         </Container>
