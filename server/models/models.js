@@ -41,6 +41,9 @@ const Participant = sequelize.define('participant', {
     studentStudentId: { type: DataTypes.INTEGER, allowNull: true },
     nutritionNutritionId: { type: DataTypes.INTEGER, allowNull: false },
     classClassId: { type: DataTypes.INTEGER, allowNull: true }
+}, {
+    indexes: [],
+    unique: false
 });
 
 const Preference = sequelize.define('preference', {
@@ -70,21 +73,31 @@ Nutrition.belongsToMany(Student, {
     otherKey: 'studentStudentId',
     onDelete: 'cascade',
 });
-Class.belongsToMany(Nutrition, {
-    through: Participant,
+Class.hasMany(Participant, {
     foreignKey: 'classClassId',
-    otherKey: 'nutritionNutritionId',
-    onDelete: 'cascade',
+    onDelete: 'cascade'
 });
-Nutrition.belongsToMany(Class, {
-    through: Participant,
-    foreignKey: 'nutritionNutritionId',
-    otherKey: 'classClassId',
-    onDelete: 'cascade',
+Participant.belongsTo(Class, {
+    foreignKey: 'classClassId'
 });
 
-Student.hasMany(Preference, { foreignKey: 'student_id', onDelete: 'cascade' });
-Preference.belongsTo(Student, { foreignKey: 'student_id' });
+Nutrition.hasMany(Participant, {
+    foreignKey: 'nutritionNutritionId',
+    onDelete: 'cascade'
+});
+Participant.belongsTo(Nutrition, {
+    foreignKey: 'nutritionNutritionId'
+});
+
+Student.hasMany(Preference, {
+    foreignKey: 'student_id',
+    onDelete: 'cascade',
+    as: 'preferences'
+});
+Preference.belongsTo(Student, {
+    foreignKey: 'student_id',
+    as: 'student'
+});
 
 export {
     Employee,
