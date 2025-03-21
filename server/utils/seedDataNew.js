@@ -74,14 +74,14 @@ export const seedDatabase = async () => {
         for (let i = 0; i < 50; i++) {
             await Attendance.create({
                 status: Math.random() > 0.2,
-                date: generateRandomDate(new Date(2024, 0, 1), new Date()).toISOString().split('T')[0],
+                date: generateRandomDate(new Date(2024, 0, 1), new Date()),
                 studentStudentId: students[Math.floor(Math.random() * students.length)].student_id
             });
         }
 
-        // Создаем питание (увеличиваем количество до 25)
+        // Создаем питание
         const nutritions = [];
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 50; i++) {
             const nutrition = await Nutrition.create({
                 name: `Питание ${i + 1}`,
                 date: generateRandomDate(new Date(2024, 0, 1), new Date()),
@@ -91,41 +91,31 @@ export const seedDatabase = async () => {
         }
 
         // Создаем участников питания
-        // Создаем массив всех возможных комбинаций питание-класс
-        const combinations = [];
+        // Для каждого питания выбираем случайные классы, но не повторяем их
         for (let i = 0; i < nutritions.length; i++) {
-            for (let j = i * 3; j < (i + 1) * 3 && j < classes.length; j++) {
-                combinations.push({
-                    nutritionId: nutritions[i].nutrition_id,
-                    classId: classes[j].class_id
-                });
-            }
-        }
+            // Перемешиваем массив классов
+            const shuffledClasses = [...classes].sort(() => Math.random() - 0.5);
+            // Берем первые 3 класса для каждого питания
+            for (let j = 0; j < 3; j++) {
+                // Для каждого класса берем 2 случайных студента
+                const classStudents = students.filter(s => s.classClassId === shuffledClasses[j].class_id);
+                const shuffledClassStudents = [...classStudents].sort(() => Math.random() - 0.5);
 
-        // Создаем участников на основе уникальных комбинаций
-        for (const combination of combinations) {
-            // Находим студентов для текущего класса
-            const classStudents = students.filter(s => s.classClassId === combination.classId);
-
-            // Берем первых двух студентов из класса
-            const studentsToAdd = classStudents.slice(0, 2);
-
-            // Создаем записи для каждого выбранного студента
-            for (const student of studentsToAdd) {
-                await Participant.create({
-                    grade: Math.floor(Math.random() * 5) + 1,
-                    studentStudentId: student.student_id,
-                    nutritionNutritionId: combination.nutritionId,
-                    classClassId: combination.classId
-                });
+                for (let k = 0; k < 2 && k < shuffledClassStudents.length; k++) {
+                    await Participant.create({
+                        grade: Math.floor(Math.random() * 5) + 1,
+                        studentStudentId: shuffledClassStudents[k].student_id,
+                        nutritionNutritionId: nutritions[i].nutrition_id,
+                        classClassId: shuffledClasses[j].class_id
+                    });
+                }
             }
         }
 
         // Создаем предпочтения
         for (let i = 0; i < 50; i++) {
-            const student = students[Math.floor(Math.random() * students.length)];
             await Preference.create({
-                student_id: student.student_id,
+                student_id: students[Math.floor(Math.random() * students.length)].student_id,
                 dish_name: generateRandomDish()
             });
         }
