@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import Pages from '../components/Pages';
 import ClassesDrop from '../components/ClassesDrop';
@@ -17,6 +17,14 @@ const AttendanceMenu = () => {
   const { students, page, totalCount, limit } = useSelector(state => state.students);
 
   const dispatch = useDispatch();
+
+  // Фильтруем attendance по выбранной дате
+  const filteredAttendance = useMemo(() => {
+    return attendance.filter(record => {
+      const recordDate = new Date(record.date).toISOString().split('T')[0];
+      return recordDate === selectedDate;
+    });
+  }, [attendance, selectedDate]);
 
   const handleSelectedDate = (date) => {
     const today = new Date().toISOString().split('T')[0];
@@ -86,7 +94,11 @@ const AttendanceMenu = () => {
           />
         </Col>
         <Col md={9} className="mt-2">
-          <StudentsList students={students} attendance={attendance} selectedDate={selectedDate} />
+          <StudentsList
+            students={students}
+            attendance={filteredAttendance}
+            selectedDate={selectedDate}
+          />
           <Pages
             totalCount={totalCount}
             limit={limit}
