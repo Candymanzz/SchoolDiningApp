@@ -21,7 +21,7 @@ const Reports = () => {
             const participants = participantsResponse.rows;
 
             if (!nutritions || !participants) {
-                throw new Error('Не удалось получить необходимые данные');
+                throw new Error('Failed to get required data');
             }
 
             // Создаем PDF
@@ -31,7 +31,7 @@ const Reports = () => {
             });
 
             if (!createResponse.data) {
-                throw new Error('Ошибка при создании PDF');
+                throw new Error('Error creating PDF');
             }
 
             // Получаем PDF
@@ -40,13 +40,13 @@ const Reports = () => {
             });
 
             if (!pdfResponse.data) {
-                throw new Error('Ошибка при получении PDF');
+                throw new Error('Error getting PDF');
             }
 
             const blob = new Blob([pdfResponse.data], { type: 'application/pdf' });
 
             if (blob.size === 0) {
-                throw new Error('Сгенерированный PDF пуст');
+                throw new Error('Generated PDF is empty');
             }
 
             // Скачиваем файл
@@ -60,8 +60,8 @@ const Reports = () => {
             window.URL.revokeObjectURL(url);
 
         } catch (error) {
-            console.error('Ошибка:', error);
-            setError(error.response?.data?.message || error.message || 'Произошла ошибка при генерации отчета');
+            console.error('Error:', error);
+            setError(error.response?.data?.message || error.message || 'An error occurred while generating the report');
         } finally {
             setLoading(false);
         }
@@ -69,7 +69,7 @@ const Reports = () => {
 
     return (
         <div style={{ padding: '20px' }}>
-            <h1>Отчеты</h1>
+            <h1>Reports</h1>
             {error && (
                 <div style={{
                     color: 'red',
@@ -96,7 +96,7 @@ const Reports = () => {
                     fontSize: '16px'
                 }}
             >
-                {loading ? 'Генерация отчета...' : 'Скачать отчет (PDF)'}
+                {loading ? 'Generating report...' : 'Download report (PDF)'}
             </button>
         </div>
     );
