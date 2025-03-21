@@ -34,13 +34,15 @@ export default function AdminMenu() {
       <Button variant={"outline-success"} className="mt-4 p-2" onClick={() => setCreatePreferenceVisible(true)}>Add preference</Button>
 
       {employee.employee_id === "ADMIN" ?
-        <Button variant={"outline-primary"} className="mt-4 p-2" onClick={() => setCreateEmployeeVisible(true)}>Add employee</Button>
+        <>
+          <Button variant={"outline-primary"} className="mt-4 p-2" onClick={() => setCreateEmployeeVisible(true)}>Add employee</Button>
+          <NavLink to={EMPLOYEES_ROUTE} style={{ textDecoration: 'none' }} >
+            <Button variant={"outline-primary"} className="mt-4 p-2" style={{ width: "100%" }}>View employees</Button>
+          </NavLink>
+        </>
         :
         ''
       }
-      <NavLink to={EMPLOYEES_ROUTE} style={{ textDecoration: 'none' }} >
-        <Button variant={"outline-primary"} className="mt-4 p-2" style={{ width: "100%" }}>View employees</Button>
-      </NavLink>
 
       <Reports />
 
