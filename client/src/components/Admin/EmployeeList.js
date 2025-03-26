@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { deleteEmployee } from '../../http/employeeAPI';
 
 export default function EmployeeList({ employees }) {
+
     const { employee } = useSelector((state) => {
         return state.employees;
     })
