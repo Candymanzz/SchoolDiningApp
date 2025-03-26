@@ -13,6 +13,7 @@ export default function CreateClassModal({ show, onHide }) {
             setEmployees(data.rows)
         })
     }, [])
+
     const addClass = async () => {
         try {
             let data;
