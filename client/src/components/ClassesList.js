@@ -39,7 +39,7 @@ export default function ClassesList({ classes }) {
                 :
                 <Accordion defaultActiveKey="0">
                     {classes.map(c =>
-                        <ClassItem key={c.id} c={c} employees={employees}/>
+                        <ClassItem key={c.id} c={c} employees={employees} />
                     )}
                 </Accordion>
             }

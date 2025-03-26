@@ -1,8 +1,7 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 
-export default function ClassesDrop({classes, setClass, selectedClass}) {
-
+export default function ClassesDrop({ classes, setClass, selectedClass }) {
     return (
         <Form>
             <Form.Select className="mt-2" value={selectedClass} onChange={e => setClass(e.target.value)}>

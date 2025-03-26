@@ -6,6 +6,7 @@ import { deleteClass } from '../http/modelAPI';
 import StudentItem from './StudentItem';
 
 export default function ClassItem({ c, employees }) {
+
     const { students } = useSelector((state) => {
         return state.students;
     })

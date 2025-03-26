@@ -3,6 +3,7 @@ import { Badge, Button, ListGroup, Modal } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
 
 export default function ClassNutritionModal(props) {
+
     const { nutritions } = useSelector((state) => {
         return state.nutritions;
     })
@@ -30,11 +31,11 @@ export default function ClassNutritionModal(props) {
             <Modal.Body>
                 <ListGroup as="ol" numbered>
                     {filteredNutritions.map(e => {
-                        const participant = participants.find(p => p.nutritionNutritionId === e.nutrition_id && p.classClassId === props.class_id); 
+                        const participant = participants.find(p => p.nutritionNutritionId === e.nutrition_id && p.classClassId === props.class_id);
 
                         return (
                             <ListGroup.Item
-                                key={e.nutrition_id} 
+                                key={e.nutrition_id}
                                 as="li"
                                 className="d-flex justify-content-between align-items-start"
                             >
@@ -42,7 +43,7 @@ export default function ClassNutritionModal(props) {
                                     <div className="fw-bold">{e.type} "{e.name}"</div>
                                     {e.date}
                                 </div>
-                                {participant.grade !== null && ( 
+                                {participant.grade !== null && (
                                     <Badge bg="primary" pill>
                                         {participant.grade}
                                     </Badge>
