@@ -6,6 +6,7 @@ import path from 'path';
 import fs from 'fs';
 
 class AttendanceController {
+
     async create(req, res, next) {
         try {
             const { studentStudentId, status, date } = req.body;

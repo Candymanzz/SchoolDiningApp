@@ -13,6 +13,7 @@ const __dirname = path.dirname(__filename);
 
 class NutritionController {
     async create(req, res, next) {
+
         try {
             const { name, date, type } = req.body;
             const nutrition = await Nutrition.create({ name, date, type });

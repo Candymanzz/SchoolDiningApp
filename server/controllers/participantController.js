@@ -3,6 +3,7 @@ import { Nutrition, Student, Class, Participant } from "../models/models.js";
 
 class ParticipantController {
     async create(req, res, next) {
+
         try {
             const { studentStudentId, classClassId, nutritionNutritionId, grade } = req.body;
             if (!nutritionNutritionId)

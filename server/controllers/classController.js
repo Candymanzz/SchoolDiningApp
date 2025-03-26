@@ -3,6 +3,7 @@ import ApiError from '../error/apiError.js';
 
 class ClassController {
     async create(req, res, next) {
+
         try {
             const { name, employeeEmployeeId } = req.body;
             const classcheck = await Class.findOne({ where: { name: name } });

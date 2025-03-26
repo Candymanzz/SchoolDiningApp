@@ -3,6 +3,7 @@ import { Class, Student } from "../models/models.js";
 
 class StudentController {
     async create(req, res, next) {
+
         try {
             const { name, surname, classClassId } = req.body;
             if (!classClassId)

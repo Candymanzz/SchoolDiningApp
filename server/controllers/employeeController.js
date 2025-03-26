@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import { Employee } from '../models/models.js';
 
 const generateJwt = (employee_id, email) => {
+
     return jwt.sign({ employee_id, email }, process.env.SECRET_KEY, { expiresIn: '24h' });
 };
 

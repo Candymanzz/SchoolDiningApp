@@ -3,6 +3,7 @@ import ApiError from '../error/apiError.js';
 
 class PreferenceController {
     async create(req, res, next) {
+
         try {
             const { student_id, dish_name } = req.body;
 
