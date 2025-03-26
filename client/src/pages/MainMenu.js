@@ -6,6 +6,7 @@ import { seeding } from '../seeding';
 import { useSelector } from 'react-redux';
 
 export default function MainMenu() {
+
   const { isAuth } = useSelector((state) => {
     return state.employees;
   })

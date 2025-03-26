@@ -13,6 +13,7 @@ import CreatePreferenceModal from '../components/Admin/CreatePreferenceModal';
 import Reports from '../pages/Reports';
 
 export default function AdminMenu() {
+
   const { employee } = useSelector((state) => {
     return state.employees;
   })

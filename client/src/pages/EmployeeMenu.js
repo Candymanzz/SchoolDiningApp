@@ -7,6 +7,7 @@ import EmployeeList from '../components/Admin/EmployeeList'
 import Pages from '../components/Pages'
 
 export default function EmployeeListMenu() {
+
     const { employees, page, totalCount, limit } = useSelector((state) => {
         return state.employees;
     })
@@ -19,7 +20,7 @@ export default function EmployeeListMenu() {
     }
     const handlePage = (n) => {
         dispatch(setPage(n))
-      }
+    }
 
     useEffect(() => {
         fetchEmployees(1, 12).then(data => {
@@ -39,7 +40,7 @@ export default function EmployeeListMenu() {
         <Container className="d-flex justify-content-center align-items-center flex-column">
             <Row className="mt-2">
                 <Col>
-                    <EmployeeList employees = {employees}/>
+                    <EmployeeList employees={employees} />
                 </Col>
             </Row>
             <Pages totalCount={totalCount} limit={limit} page={page} handlePage={(p) => handlePage(p)} />

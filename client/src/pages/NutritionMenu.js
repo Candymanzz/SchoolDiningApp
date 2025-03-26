@@ -10,6 +10,7 @@ import { setStudents } from '../store/studentsSlice';
 import { setParticipants } from '../store/participantsSlice';
 
 export default function NutritionMenu() {
+
   const { selectedDateFrom, selectedDateTo, page, totalCount, limit } = useSelector(state => state.nutritions);
   const { employee } = useSelector(state => state.employees);
   const { nutritions } = useSelector(state => state.nutritions);

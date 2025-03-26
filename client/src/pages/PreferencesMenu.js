@@ -7,6 +7,7 @@ import PreferenceList from '../components/PreferenceList'
 import { fetchPreferences } from '../http/modelAPI'
 
 export default function PreferenceMenu() {
+
     const { preferences, page, totalCount, limit } = useSelector((state) => state.preferences)
     const dispatch = useDispatch()
 

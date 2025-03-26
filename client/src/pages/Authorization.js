@@ -9,7 +9,6 @@ import { MAIN_ROUTE } from '../utils/consts'
 // import { REGISTRATION_ROUTE } from '../utils/consts'
 
 export default function Authorization() {
-
   const history = useNavigate()
 
   const dispatch = useDispatch();

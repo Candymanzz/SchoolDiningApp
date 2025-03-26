@@ -9,6 +9,7 @@ import { setNutritions } from '../store/nutritionsSlice'
 import { setParticipants } from '../store/participantsSlice'
 
 export default function ClassMenu() {
+
   const { classes } = useSelector((state) => {
     return state.classes;
   })
@@ -37,10 +38,10 @@ export default function ClassMenu() {
       handleClasses(data.rows)
       handleTotalCount(data.count)
     })
-    fetchNutritions(null,null,1,999).then(data => {
+    fetchNutritions(null, null, 1, 999).then(data => {
       handleNutritions(data.rows)
     })
-    fetchParticipants(null,1,999).then(data => {
+    fetchParticipants(null, 1, 999).then(data => {
       handleParticipants(data.rows)
     })
   }, [])
