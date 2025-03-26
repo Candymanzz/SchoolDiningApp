@@ -2,6 +2,7 @@ import { registration } from "./http/employeeAPI"
 import { createAttendance, createClass, createNutritions, createParticipant, createStudent, createPreference } from "./http/modelAPI"
 
 export const seeding = async () => {
+
         const runWithErrorHandling = async (fn, ...args) => {
                 try {
                         await fn(...args);
