@@ -3,6 +3,7 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import { createParticipant, fetchClasses, fetchNutritions, fetchStudents } from '../../http/modelAPI';
 
 export default function CreateParticipantModal({ show, onHide }) {
+
     const [nutrition, setNutrition] = useState(null);
     const [student, setStudent] = useState(null);
     const [classx, setClass] = useState(null);
