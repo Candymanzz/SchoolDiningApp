@@ -1,10 +1,10 @@
 import React from 'react'
-import { Accordion, Button, ListGroup, Image } from 'react-bootstrap'
-import { deleteNutritions, deleteParticipant } from '../http/modelAPI'; // Исправлено: deleteNutrition -> deleteNutritions
+import { Accordion, Button, ListGroup } from 'react-bootstrap'
+import { deleteNutritions, deleteParticipant } from '../http/modelAPI';
 
 export default function NutritionsList({ employee, nutritions, participants, students, classes }) {
     const delNutrition = (nutritionId) => {
-        deleteNutritions(nutritionId).finally(() => window.location.reload()); // Исправлено: deleteNutrition -> deleteNutritions
+        deleteNutritions(nutritionId).finally(() => window.location.reload());
     }
 
     const delPart = (prtId) => {
@@ -34,13 +34,6 @@ export default function NutritionsList({ employee, nutritions, participants, stu
                                 }
                             </Accordion.Header>
                             <Accordion.Body>
-                                {e.file ? (
-                                    e.file.substr(e.file.length - 3) === "mp4" ?
-                                        <video controls style={{ maxWidth: "100%", maxHeight: "auto" }} src={process.env.REACT_APP_API_URL + e.file} />
-                                        :
-                                        <Image style={{ maxWidth: "100%", maxHeight: "auto" }} src={process.env.REACT_APP_API_URL + e.file} />
-                                ) : null}
-
                                 {participants.some(prt => prt.nutritionNutritionId === e.nutrition_id) ?
                                     <ListGroup>Participants:
                                         {participants.filter(prt => prt.nutritionNutritionId === e.nutrition_id).map(p => {
