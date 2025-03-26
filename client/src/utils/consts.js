@@ -6,4 +6,5 @@ export const NUTRITIONS_ROUTE = '/nutrition'
 export const CLASSES_ROUTE = '/classes'
 export const ATTENDANCE_ROUTE = '/attendance'
 export const PREFERENCE_ROUTE = '/preference'
+
 export const MAIN_ROUTE = '/' 
