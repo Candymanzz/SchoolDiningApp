@@ -15,16 +15,7 @@ class NutritionController {
     async create(req, res, next) {
         try {
             const { name, date, type } = req.body;
-            let fileName = null;
-
-            if (req.files && req.files.file) {
-                const { file } = req.files;
-                fileName = uuidv4() + "." + file.name.substr(file.name.length - 3);
-                file.mv(path.resolve(__dirname, '..', 'static', fileName));
-            }
-
-            const nutrition = await Nutrition.create({ name, date, type, file: fileName });
-
+            const nutrition = await Nutrition.create({ name, date, type });
             return res.json(nutrition);
         } catch (e) {
             next(ApiError.internal(e.message));
@@ -41,8 +32,6 @@ class NutritionController {
             await Nutrition.destroy(
                 { where: { nutrition_id: nutrition_id } },
             );
-            const file_path = path.resolve(__dirname, '..', 'static', nutrition.file);
-            fs.unlink(file_path, function (err) { });
             return res.json();
         } catch (e) {
             next(ApiError.internal(e.message));
