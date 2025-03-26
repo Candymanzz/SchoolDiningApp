@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 const createAndDownloadAttendPdf = async (req, res) => {
+
     try {
         const { date, classx, students, attendance } = req.body;
 

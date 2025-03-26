@@ -1,5 +1,6 @@
 // nutritionspdf.js
 export default ({ employee, nutritions, participants, students, classes }) => {
+
     console.log("Template received data:", { employee, nutritions, participants, students, classes });
 
     return `
