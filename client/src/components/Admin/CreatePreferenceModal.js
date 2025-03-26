@@ -3,6 +3,7 @@ import { Button, Form, Modal } from 'react-bootstrap'
 import { createPreference, fetchStudents } from '../../http/modelAPI'
 
 export default function CreatePreferenceModal({ show, onHide }) {
+
     const [student, setStudent] = useState('')
     const [food, setFood] = useState('')
 
