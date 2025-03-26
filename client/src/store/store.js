@@ -7,6 +7,7 @@ import nutritionsReducer from "./nutritionsSlice"
 import participantsReducer from "./participantsSlice"
 import preferencesSlice from "./preferencesSlice"
 
+
 const store = configureStore({
   reducer: {
     employees: employeesReducer,
