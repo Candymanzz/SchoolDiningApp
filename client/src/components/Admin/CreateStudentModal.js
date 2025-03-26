@@ -3,6 +3,7 @@ import { createStudent, fetchClasses } from '../../http/modelAPI'
 import { Button, Form, Modal } from 'react-bootstrap'
 
 export default function CreateStudentModal({ show, onHide }) {
+
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [classx, setClass] = useState('')
