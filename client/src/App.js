@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import { Container, Spinner } from "react-bootstrap";
 
 function App() {
+
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
