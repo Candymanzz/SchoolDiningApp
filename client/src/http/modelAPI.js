@@ -4,6 +4,7 @@ import { $authHost, $host } from "./index"
 
 //Classes
 export const createClass = async (name, employeeEmployeeId) => {
+
     const { data } = await $authHost.post('api/class/', { name, employeeEmployeeId })
     return data
 }
