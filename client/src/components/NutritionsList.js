@@ -3,6 +3,7 @@ import { Accordion, Button, ListGroup } from 'react-bootstrap'
 import { deleteNutritions, deleteParticipant } from '../http/modelAPI';
 
 export default function NutritionsList({ employee, nutritions, participants, students, classes }) {
+
     const delNutrition = (nutritionId) => {
         deleteNutritions(nutritionId).finally(() => window.location.reload());
     }
