@@ -6,11 +6,6 @@ export default function CreateNutritionModal({ show, onHide }) {
     const [name, setName] = useState('')
     const [date, setDate] = useState('')
     const [type, setType] = useState('')
-    const [file, setFile] = useState(null)
-
-    const selectFile = e => {
-        setFile(e.target.files[0])
-    }
 
     const addNutrition = async () => {
         try {
@@ -18,14 +13,12 @@ export default function CreateNutritionModal({ show, onHide }) {
             formData.append('name', name)
             formData.append('date', date)
             formData.append('type', type)
-            formData.append('file', file)
             let data;
             data = await createNutritions(formData).then(() => {
                 onHide('')
                 setName('')
                 setDate('')
                 setType('')
-                setFile(null)
             })
         } catch (e) {
             alert(e.response.data.message)
