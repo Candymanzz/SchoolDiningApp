@@ -5,7 +5,6 @@ import { Form } from 'react-bootstrap';
 import { registration } from '../../http/employeeAPI';
 
 export default function CreateEmployeeModal({ show, onHide }) {
-
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [position, setPosition] = useState('')
