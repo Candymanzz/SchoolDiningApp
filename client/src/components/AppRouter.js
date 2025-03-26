@@ -5,6 +5,7 @@ import { MAIN_ROUTE } from '../utils/consts'
 import { useSelector } from 'react-redux'
 
 export default function AppRouter() {
+
   const { isAuth } = useSelector((state) => {
     return state.employees;
   })
