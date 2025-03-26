@@ -3,6 +3,7 @@ import { Button, Form, Modal } from 'react-bootstrap'
 import { createNutritions } from '../../http/modelAPI'
 
 export default function CreateNutritionModal({ show, onHide }) {
+
     const [name, setName] = useState('')
     const [date, setDate] = useState('')
     const [type, setType] = useState('')
