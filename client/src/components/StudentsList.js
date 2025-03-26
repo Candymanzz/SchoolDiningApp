@@ -2,21 +2,22 @@ import React, { useMemo } from 'react';
 import { Form, ListGroup } from 'react-bootstrap';
 
 export default function StudentsList({ students, attendance, selectedDate }) {
-    console.log('Attendance data:', attendance); // Отладка
-    console.log('Selected date:', selectedDate); // Отладка
+
+    console.log('Attendance data:', attendance);
+    console.log('Selected date:', selectedDate);
 
     const attendanceMap = useMemo(() => {
         const map = attendance.reduce((acc, record) => {
-            console.log('Processing record:', record); // Отладка
+            console.log('Processing record:', record);
 
-            // Преобразуем строку даты в объект Date и обратно в строку для нормализации формата
+
             let formattedDate;
             try {
-                // Если дата приходит как строка YYYY-MM-DD
+
                 if (typeof record.date === 'string' && record.date.includes('-')) {
                     formattedDate = record.date;
                 } else {
-                    // Если дата приходит как timestamp
+
                     formattedDate = new Date(record.date).toISOString().split('T')[0];
                 }
             } catch (error) {
@@ -24,17 +25,17 @@ export default function StudentsList({ students, attendance, selectedDate }) {
                 formattedDate = record.date;
             }
 
-            console.log('Original date:', record.date); // Отладка
-            console.log('Formatted date:', formattedDate); // Отладка
+            console.log('Original date:', record.date);
+            console.log('Formatted date:', formattedDate);
 
             const key = `${record.studentStudentId}-${formattedDate}`;
-            console.log('Generated key:', key); // Отладка
-            console.log('Status value:', record.status); // Отладка
+            console.log('Generated key:', key);
+            console.log('Status value:', record.status);
 
             acc[key] = record.status;
             return acc;
         }, {});
-        console.log('Final attendance map:', map); // Отладка
+        console.log('Final attendance map:', map);
         return map;
     }, [attendance]);
 
@@ -52,9 +53,9 @@ export default function StudentsList({ students, attendance, selectedDate }) {
         <ListGroup>
             {students.map((std) => {
                 const attendanceKey = `${std.student_id}-${selectedDate}`;
-                console.log('Checking attendance for key:', attendanceKey); // Отладка
+                console.log('Checking attendance for key:', attendanceKey);
                 const isAttended = attendanceMap[attendanceKey];
-                console.log('Is attended value:', isAttended); // Отладка
+                console.log('Is attended value:', isAttended);
 
                 return (
                     <ListGroup.Item key={std.student_id}>

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 export default function StudentNutritionModal(props) {
 
+
     const { nutritions } = useSelector((state) => {
         return state.nutritions;
     })

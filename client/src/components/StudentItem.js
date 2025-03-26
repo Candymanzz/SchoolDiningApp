@@ -5,6 +5,7 @@ import { deleteStudent } from '../http/modelAPI';
 import StudentNutritionModal from './StudentNutritionModal';
 
 export default function StudentItem({ c, s }) {
+
     const { employee } = useSelector((state) => {
         return state.employees;
     })
