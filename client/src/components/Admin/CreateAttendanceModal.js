@@ -14,15 +14,16 @@ export default function CreateAttendanceModal({ show, onHide }) {
             setStudents(data.rows)
         })
     }, [])
+
     const addExcursion = async () => {
         try {
             let data;
             data = await createAttendance(student, status, date).then(() => {
-                            onHide('')
-                            setStudent('')
-                            setStatus('')
-                            setDate('')
-                        })
+                onHide('')
+                setStudent('')
+                setStatus('')
+                setDate('')
+            })
         } catch (e) {
             alert(e.response.data.message)
         }
