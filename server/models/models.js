@@ -31,8 +31,7 @@ const Nutrition = sequelize.define('nutrition', {
     nutrition_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, allowNull: false },
     date: { type: DataTypes.DATE, allowNull: false },
-    type: { type: DataTypes.STRING, allowNull: false },
-    file: { type: DataTypes.STRING, allowNull: true }
+    type: { type: DataTypes.STRING, allowNull: false }
 });
 
 const Participant = sequelize.define('participant', {
