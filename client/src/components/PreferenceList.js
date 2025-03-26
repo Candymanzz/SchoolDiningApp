@@ -4,6 +4,7 @@ import { fetchPreferences } from "./Preferenceapi";
 import Pages from "./Pages";
 
 const PreferenceList = () => {
+
     const [preferences, setPreferences] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

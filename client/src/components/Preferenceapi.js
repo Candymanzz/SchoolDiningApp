@@ -7,6 +7,7 @@ export const fetchPreferences = async (page = 1, limit = 10) => {
 };
 
 export const fetchStudents = async () => {
+
     const response = await fetch("http://localhost:5000/api/student");
     if (!response.ok) {
         throw new Error("Ошибка загрузки студентов");

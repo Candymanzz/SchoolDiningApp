@@ -6,6 +6,7 @@ import PreferenceList from './PreferenceList';
 import CreatePreference from './CreatePreference';
 
 const PreferencePage = () => {
+
     const dispatch = useDispatch();
     const preferences = useSelector((state) => state.preferences.items);
 

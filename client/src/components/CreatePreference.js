@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { createPreference } from '../store/preferenceSlice';
 
 const CreatePreference = () => {
+
     const [studentId, setStudentId] = useState('');
     const [dishName, setDishName] = useState('');
     const dispatch = useDispatch();

@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 
 const PreferenceItem = ({ preference }) => {
+
     return (
         <Card className="mb-2">
             <Card.Body>
