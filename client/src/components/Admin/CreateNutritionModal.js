@@ -41,13 +41,10 @@ export default function CreateNutritionModal({ show, onHide }) {
             <Modal.Body>
                 <Form>
                     <Form.Select className="mt-2" value={type} onChange={e => setType(e.target.value)}>
-                        <option value=''>Select class</option>
-                        <option value='11-A'>11-A</option>
-                        <option value='10-A'>10-A</option>
-                        <option value='11-Б'>11-Б</option>
-                        <option value='10-Б'>10-Б</option>
-                        <option value='9-А'>9-А</option>
-                        <option value='9-Б'>9-Б</option>
+                        <option value=''>Select type</option>
+                        <option value='Обед'>Обед</option>
+                        <option value='Ужин'>Ужин</option>
+                        <option value='Завтрак'>Завтрак</option>
                     </Form.Select>
                     <Form.Control maxLength="50" className="mt-2" placeholder={"Name"} value={name} onChange={e => setName(e.target.value)} />
                     <Form.Control type="date" className="mt-2" value={date} onChange={e => setDate(e.target.value)} />
