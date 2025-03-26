@@ -11,6 +11,7 @@ import { setIsAuth, setEmployee } from "../store/employeesSlice"
 
 
 export default function NavBar() {
+
   const { isAuth } = useSelector((state) => {
     return state.employees;
   })
@@ -34,7 +35,7 @@ export default function NavBar() {
   return (
     <Navbar bg="primary" data-bs-theme="dark">
       <Container>
-        <NavLink to={MAIN_ROUTE}><Image width ="35" src="./favico.ico" fluid/></NavLink>
+        <NavLink to={MAIN_ROUTE}><Image width="35" src="./favico.ico" fluid /></NavLink>
         {isAuth ?
           <Nav className="ml-auto" style={{ color: 'white' }}>
             <Button variant={"outline-light"} onClick={() => history(ADMIN_ROUTE)}>Admin Menu</Button>
