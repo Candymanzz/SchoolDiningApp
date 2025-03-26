@@ -1,15 +1,15 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 
-dotenv.config(); // Загружаем переменные окружения
+dotenv.config();
 
 const sequelize = new Sequelize(
-    process.env.DB_NAME, // Имя базы данных
-    process.env.DB_USER, // Пользователь
-    process.env.DB_PASSWORD, // Пароль
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
     {
-        host: process.env.DB_HOST, // Хост (localhost или IP)
-        port: process.env.DB_PORT, // Порт (5432 по умолчанию)
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
         dialect: "postgres",
     }
 );
