@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {setPage} from './studentsSlice'
+import { setPage } from './studentsSlice'
 
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -33,6 +33,7 @@ const excursionsSlice = createSlice({
 
 export const { setAttendance, _setSelectedDate, _setSelectedClass } = excursionsSlice.actions;
 export const setSelectedDate = (date) => (dispatch) => {
+
   dispatch(_setSelectedDate(date));
   dispatch(setPage(1));
 };

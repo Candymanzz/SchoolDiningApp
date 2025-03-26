@@ -5,6 +5,7 @@ const initialState = {
     ]
 };
 
+
 const participantsSlice = createSlice({
     name: 'participants',
     initialState,

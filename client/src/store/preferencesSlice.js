@@ -7,6 +7,7 @@ const initialState = {
     limit: 10
 };
 
+
 const preferenceSlice = createSlice({
     name: 'preferences',
     initialState,

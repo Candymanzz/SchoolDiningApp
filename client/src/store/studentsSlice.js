@@ -7,6 +7,7 @@ const initialState = {
   limit: 10
 };
 
+
 const classesSlice = createSlice({
   name: 'students',
   initialState,

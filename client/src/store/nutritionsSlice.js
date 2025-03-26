@@ -9,7 +9,6 @@ const initialState = {
     totalCount: 0,
     limit: 6
 };
-
 const nutritionsSlice = createSlice({
     name: 'nutritions',
     initialState,

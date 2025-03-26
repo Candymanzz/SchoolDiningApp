@@ -8,7 +8,6 @@ const initialState = {
   totalCount: 0,
   limit: 12
 };
-
 const employeesSlice = createSlice({
   name: 'employees',
   initialState,

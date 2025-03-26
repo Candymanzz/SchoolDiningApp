@@ -13,6 +13,7 @@ const classesSlice = createSlice({
   initialState,
   reducers: {
     setClasses: (state, action) => {
+
       state.classes = action.payload;
     },
     setPage: (state, action) => {
