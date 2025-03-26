@@ -6,6 +6,7 @@ import ClassMenu from "./pages/ClassMenu"
 import AttendanceMenu from "./pages/AttendanceMenu"
 import EmployeeListMenu from "./pages/EmployeeMenu"
 import PreferenceMenu from "./pages/PreferencesMenu"
+
 import { ADMIN_ROUTE, ATTENDANCE_ROUTE, CLASSES_ROUTE, NUTRITIONS_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, EMPLOYEES_ROUTE, PREFERENCE_ROUTE } from "./utils/consts"
 
 export const authRoutes = [
